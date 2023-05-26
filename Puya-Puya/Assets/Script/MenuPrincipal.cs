@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class MenuPrincipal : MonoBehaviour
 {
-    public GameObject loadingscreen, menuObj, settingsObj;
-    public string sceneName;
+    public GameObject menuObj, settingsObj;
+    public string sceneName="Gameplay";
 
     void Start()
     {
@@ -19,7 +19,6 @@ public class MenuPrincipal : MonoBehaviour
     }
     public void playGame()
     {
-        loadingscreen.SetActive(true);
         PlayerPrefs.SetInt("level", 1);
         PlayerPrefs.Save();
         SceneManager.LoadScene(sceneName);
