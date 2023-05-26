@@ -51,12 +51,36 @@ public class Grid : MonoBehaviour
 
     public void Clear(float col, float row)
     {
+        if (gameObject.transform.position.x == -600)//grid  position:-600,0  size:450,900
+        {
+            col = (col - (-3.8f)) / -0.7f;
+            row = (row - (-3.8f)) / -0.7f;
+        }
+        else
+        {
+            col = (col - (3.8f)) / 0.7f;
+            row = (row - (3.8f)) / 0.7f;
+        }
+
         gameBoard[(int)col, (int)row] = null;
     }
 
     public void Add(float col, float row, Transform obj)
     {
-        gameBoard[(int)col, (int)row] = obj;
+        int colf = (int)col;
+        int rowf = (int)row;
+        if (gameObject.transform.position.x <0)//grille de gauche  position:-600,0  size:450,900
+        {
+            col = (col - (-3.8f)) / -0.7f;
+            row = (row - 3.8f) / 0.7f;
+        }
+        else
+        {
+            col = (col - 3.8f) / 0.7f;
+            row = (row - 3.8f) / 0.7f;
+        }
+
+        gameBoard[Convert.ToInt32(col), Convert.ToInt32(row)] = obj;
     }
 
     public void Delete(Transform puyo)
@@ -181,7 +205,7 @@ public class Grid : MonoBehaviour
     {
         string res = "";
 
-        for (int row = 11; row >= 0; row--)
+        for (int row = 0; row < 12; row++)
         {
             res += $"{row} :";
             for (int col = 0; col < 6; col++)

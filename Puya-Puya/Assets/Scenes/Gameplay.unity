@@ -2303,6 +2303,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grid1: {fileID: 591141627}
   grid2: {fileID: 1001692256}
+  posSpawnP1: {x: -5.9, y: -5.2}
+  posSpawnP2: {x: 5.2, y: 5.9}
 --- !u!1 &503620636
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,13 +6,14 @@ public class BlocPuya : MonoBehaviour
 {
     public GameObject[] unitArray = new GameObject[2];
 
-    public float fallSpeed = 1;
+    public float fallSpeed = 10;
     public float interval = 0;
 
     private Vector3 left = Vector3.left;
     private Vector3 right = Vector3.right;
     private Vector3 down = Vector3.down;
     private Vector3 up = Vector3.up;
+    private float gridStep = 0.7f;
 
     private bool puyoUnitDropsFinished = false;
 
@@ -22,8 +23,16 @@ public class BlocPuya : MonoBehaviour
 
     void Start()
     {
-        unitArray[0] = Instantiate((GameObject)Resources.Load("PuyaUnit"), transform.position, Quaternion.identity);
-        unitArray[1] = Instantiate((GameObject)Resources.Load("PuyaUnit"), new Vector2(transform.position.x + 1, transform.position.y), Quaternion.identity);
+        if (transform.position.x < 0)
+        {
+            unitArray[0] = Instantiate((GameObject)Resources.Load("PuyaUnit"), new Vector2(ps.posSpawnP1.x, 3.8f), Quaternion.identity);
+            unitArray[1] = Instantiate((GameObject)Resources.Load("PuyaUnit"), new Vector2(ps.posSpawnP1.y, 3.8f), Quaternion.identity);
+        }
+        else
+        {
+            unitArray[0] = Instantiate((GameObject)Resources.Load("PuyaUnit"), new Vector2(ps.posSpawnP2.x, 3.8f), Quaternion.identity);
+            unitArray[1] = Instantiate((GameObject)Resources.Load("PuyaUnit"), new Vector2(ps.posSpawnP2.y, 3.8f), Quaternion.identity);
+        }
         unitArray[0].transform.parent = gameObject.transform;
         unitArray[1].transform.parent = gameObject.transform;
         unitArray[0].GetComponent<PuyaUnit>().grid = grid;
@@ -179,7 +188,7 @@ public class BlocPuya : MonoBehaviour
     {
         foreach (Transform puya in transform)
         {
-            Vector3 newPosition = new Vector3(puya.position.x + direction.x, puya.position.y + direction.y, 0);
+            Vector3 newPosition = new Vector3(puya.position.x + direction.x* gridStep, puya.position.y + direction.y* gridStep, 0);
 
             if (!grid.FreeSpace(newPosition, transform))
             {

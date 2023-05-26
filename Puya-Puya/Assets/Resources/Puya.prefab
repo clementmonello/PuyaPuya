@@ -50,6 +50,8 @@ MonoBehaviour:
   - {fileID: 0}
   fallSpeed: 1
   interval: 0
+  ps: {fileID: 0}
+  grid: {fileID: 0}
 --- !u!114 &252180189409751407
 MonoBehaviour:
   m_ObjectHideFlags: 0
