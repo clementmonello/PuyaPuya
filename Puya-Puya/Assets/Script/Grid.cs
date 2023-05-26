@@ -6,16 +6,16 @@ using UnityEngine.UI;
 
 public class Grid : MonoBehaviour
 {
-    public static Transform[,] gameBoard = new Transform[6, 12];
+    public Transform[,] gameBoard = new Transform[6, 12];
 
-    public static bool WithinBorders(Vector3 target)
+    public bool WithinBorders(Vector3 target)
     {
         return target.x > -1 &&
             target.x < 6 &&
             target.y > -1 &&
             target.y < 12;
     }
-    public static bool FreeSpace(Vector3 target, Transform parentTransform)
+    public bool FreeSpace(Vector3 target, Transform parentTransform)
     {
         if (WithinBorders(target))
         {
@@ -25,7 +25,7 @@ public class Grid : MonoBehaviour
         return false;
     }
 
-    public static bool IsEmpty(int col, int row)
+    public bool IsEmpty(int col, int row)
     {
         if (WithinBorders(new Vector3(col, row, 0)))
         {
@@ -34,7 +34,7 @@ public class Grid : MonoBehaviour
         return false;
     }
 
-    public static bool ColorMatches(int col, int row, Transform puyoUnit)
+    public bool ColorMatches(int col, int row, Transform puyoUnit)
     {
         if (WithinBorders(new Vector3(col, row, 0)))
         {
@@ -43,30 +43,30 @@ public class Grid : MonoBehaviour
         return false;
     }
 
-    public static bool HasMatchingNeighbor(Vector2 pos, Vector3 direction, Transform puyoUnitTransform)
+    public bool HasMatchingNeighbor(Vector2 pos, Vector3 direction, Transform puyoUnitTransform)
     {
         Vector2 newPos = new Vector2(pos.x + direction.x, pos.y + direction.y);
         return !IsEmpty((int)newPos.x, (int)newPos.y) && ColorMatches((int)newPos.x, (int)newPos.y, puyoUnitTransform);
     }
 
-    public static void Clear(float col, float row)
+    public void Clear(float col, float row)
     {
         gameBoard[(int)col, (int)row] = null;
     }
 
-    public static void Add(float col, float row, Transform obj)
+    public void Add(float col, float row, Transform obj)
     {
         gameBoard[(int)col, (int)row] = obj;
     }
 
-    public static void Delete(Transform puyo)
+    public void Delete(Transform puyo)
     {
         Vector2 pos = new Vector2(Mathf.Round(puyo.position.x), Mathf.Round(puyo.position.y));
         gameBoard[(int)pos.x, (int)pos.y] = null;
         UnityEngine.Object.Destroy(puyo.gameObject);
     }
 
-    public static bool WhatToDelete()
+    public bool WhatToDelete()
     {
         List<Transform> groupToDelete = new List<Transform>();
 
@@ -106,7 +106,7 @@ public class Grid : MonoBehaviour
         }
     }
 
-    public static void DropAllColumns()
+    public void DropAllColumns()
     {
         for (int row = 0; row < 12; row++)
         {
@@ -121,7 +121,7 @@ public class Grid : MonoBehaviour
         }
     }
 
-    static void AddNeighbors(Transform currentUnit, List<Transform> currentGroup)
+    public void AddNeighbors(Transform currentUnit, List<Transform> currentGroup)
     {
         Vector3[] directions = { Vector3.up, Vector3.down, Vector3.right, Vector3.left };
         if (currentGroup.IndexOf(currentUnit) == -1)
@@ -146,7 +146,7 @@ public class Grid : MonoBehaviour
         }
     }
 
-    static void DeleteUnits(List<Transform> unitsToDelete)
+    public void DeleteUnits(List<Transform> unitsToDelete)
     {
         foreach (Transform unit in unitsToDelete)
         {
@@ -154,7 +154,7 @@ public class Grid : MonoBehaviour
         }
     }
 
-    public static bool AnyFallingBlocks()
+    public bool AnyFallingBlocks()
     {
         for (int row = 11; row >= 0; row--)
         {
@@ -177,29 +177,28 @@ public class Grid : MonoBehaviour
         return false;
     }
 
-    public static void DebugBoard()
+    public void DebugBoard()
     {
-        Text text = GameObject.Find("Text").GetComponent<Text>();
-        string boardContents = "";
+        string res = "";
 
         for (int row = 11; row >= 0; row--)
         {
-            boardContents += $"{row} :";
+            res += $"{row} :";
             for (int col = 0; col < 6; col++)
             {
                 if (gameBoard[col, row] == null)
                 {
-                    boardContents += "o ";
+                    res += "o ";
                 }
                 else
                 {
                     int idx = gameBoard[col, row].gameObject.GetComponent<PuyaUnit>().colorIdx;
-                    string[] colorArray = { "B", "G", "R", "C" };
-                    boardContents += $"{colorArray[idx]} ";
+                    string[] colorArray = { "B", "G", "Y", "V" };
+                    res += $"{colorArray[idx]} ";
                 }
             }
-            boardContents += "\n";
+            res += "\n";
         }
-        text.text = boardContents;
+        Debug.Log(res);
     }
 }

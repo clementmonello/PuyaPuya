@@ -16,12 +16,18 @@ public class BlocPuya : MonoBehaviour
 
     private bool puyoUnitDropsFinished = false;
 
+    public PuyaSpawner ps;
+
+    public Grid grid;
+
     void Start()
     {
         unitArray[0] = Instantiate((GameObject)Resources.Load("PuyaUnit"), transform.position, Quaternion.identity);
         unitArray[1] = Instantiate((GameObject)Resources.Load("PuyaUnit"), new Vector2(transform.position.x + 1, transform.position.y), Quaternion.identity);
         unitArray[0].transform.parent = gameObject.transform;
         unitArray[1].transform.parent = gameObject.transform;
+        unitArray[0].GetComponent<PuyaUnit>().grid = grid;
+        unitArray[1].GetComponent<PuyaUnit>().grid = grid;
         UpdateGameBoard();
     }
 
@@ -101,7 +107,7 @@ public class BlocPuya : MonoBehaviour
     {
         foreach (Transform puyaUnit in transform)
         {
-            Grid.Clear(puyaUnit.transform.position.x, puyaUnit.transform.position.y);
+            grid.Clear(puyaUnit.transform.position.x, puyaUnit.transform.position.y);
         }
     }
 
@@ -109,7 +115,7 @@ public class BlocPuya : MonoBehaviour
     {
         foreach (Transform puyaUnit in transform)
         {
-            Grid.Add(puyaUnit.position.x, puyaUnit.position.y, puyaUnit);
+            grid.Add(puyaUnit.position.x, puyaUnit.position.y, puyaUnit);
         }
     }
 
@@ -175,7 +181,7 @@ public class BlocPuya : MonoBehaviour
         {
             Vector3 newPosition = new Vector3(puya.position.x + direction.x, puya.position.y + direction.y, 0);
 
-            if (!Grid.FreeSpace(newPosition, transform))
+            if (!grid.FreeSpace(newPosition, transform))
             {
                 return false;
             }
@@ -187,7 +193,7 @@ public class BlocPuya : MonoBehaviour
     {
         Vector3 puyaPos = unitArray[1].transform.position;
         Vector3 newPosition = new Vector3(puyaPos.x + direction.x, puyaPos.y + direction.y);
-        return Grid.FreeSpace(newPosition, transform);
+        return grid.FreeSpace(newPosition, transform);
     }
 
     private void DropPuyaUnits()
@@ -216,6 +222,6 @@ public class BlocPuya : MonoBehaviour
     {
         yield return new WaitUntil(() => !ActivelyFalling());
 
-        GameObject.Find("PuyaSpawner").GetComponent<PuyaSpawner>().SpawnPuyo();
+        ps.SpawnPuyo();
     }
 }
