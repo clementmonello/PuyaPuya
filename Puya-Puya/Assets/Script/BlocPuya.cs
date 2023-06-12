@@ -108,7 +108,7 @@ public class BlocPuya : MonoBehaviour
     void Move(Vector3 vector, Transform target)
     {
         ClearCurrentGameboardPosition();
-        target.position += vector;
+        target.position += vector*gridStep;
         UpdateGameBoard();
     }
 
@@ -189,7 +189,6 @@ public class BlocPuya : MonoBehaviour
         foreach (Transform puya in transform)
         {
             Vector3 newPosition = new Vector3(puya.position.x + direction.x* gridStep, puya.position.y + direction.y* gridStep, 0);
-
             if (!grid.FreeSpace(newPosition, transform))
             {
                 return false;
@@ -229,8 +228,9 @@ public class BlocPuya : MonoBehaviour
 
     IEnumerator SpawnNextBlock()
     {
+        Debug.Log("1");
         yield return new WaitUntil(() => !ActivelyFalling());
-
+        Debug.Log("2");
         ps.SpawnPuyo();
     }
 }

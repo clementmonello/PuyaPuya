@@ -49,13 +49,12 @@ public class PuyaSpawner : MonoBehaviour
         yield return new WaitUntil(() => !grid1.AnyFallingBlocks() && !grid1.WhatToDelete());
         if (GameIsOver())
         {
-            //GameObject.Find("GameOverCanvas").GetComponent<CanvasGroup>().alpha = 1;
             enabled = false;
             Debug.Log("game over");
         }
         else
         {
-            Debug.Log(posSpawnP1);
+            Debug.Log("spawn");
             activePuyo = Instantiate((GameObject)Resources.Load("Puya"), posSpawnP1, Quaternion.identity).GetComponent<BlocPuya>();
             activePuyo.grid = grid1;
             activePuyo.ps = this;

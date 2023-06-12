@@ -10,17 +10,18 @@ public class Grid : MonoBehaviour
 
     public bool WithinBorders(Vector3 target)
     {
-        return target.x > -1 &&
-            target.x < 6 &&
-            target.y > -1 &&
-            target.y < 12;
+        return Convert.ToInt32(target.x) > -1 &&
+            Convert.ToInt32(target.x) < 6 &&
+            Convert.ToInt32(target.y) > -1 &&
+            Convert.ToInt32(target.y) < 12;
     }
     public bool FreeSpace(Vector3 target, Transform parentTransform)
     {
-        if (WithinBorders(target))
+        Vector3 v = worldPosToGridPos(target);
+        if (WithinBorders(v))
         {
-            return gameBoard[(int)target.x, (int)target.y] == null ||
-                gameBoard[(int)target.x, (int)target.y].parent == parentTransform;
+            return gameBoard[Convert.ToInt32(v.x), Convert.ToInt32(v.y)] == null ||
+                gameBoard[Convert.ToInt32(v.x), Convert.ToInt32(v.y)].parent == parentTransform;
         }
         return false;
     }
@@ -51,36 +52,16 @@ public class Grid : MonoBehaviour
 
     public void Clear(float col, float row)
     {
-        if (gameObject.transform.position.x == -600)//grid  position:-600,0  size:450,900
-        {
-            col = (col - (-3.8f)) / -0.7f;
-            row = (row - (-3.8f)) / -0.7f;
-        }
-        else
-        {
-            col = (col - (3.8f)) / 0.7f;
-            row = (row - (3.8f)) / 0.7f;
-        }
+        Vector3 v=worldPosToGridPos(new Vector3(col,row));
 
-        gameBoard[(int)col, (int)row] = null;
+        gameBoard[Convert.ToInt32(v.x), Convert.ToInt32(v.y)] = null;
     }
 
     public void Add(float col, float row, Transform obj)
     {
-        int colf = (int)col;
-        int rowf = (int)row;
-        if (gameObject.transform.position.x <0)//grille de gauche  position:-600,0  size:450,900
-        {
-            col = (col - (-3.8f)) / -0.7f;
-            row = (row - 3.8f) / 0.7f;
-        }
-        else
-        {
-            col = (col - 3.8f) / 0.7f;
-            row = (row - 3.8f) / 0.7f;
-        }
+        Vector3 v = worldPosToGridPos(new Vector3(col, row));
 
-        gameBoard[Convert.ToInt32(col), Convert.ToInt32(row)] = obj;
+        gameBoard[Convert.ToInt32(v.x), Convert.ToInt32(v.y)] = obj;
     }
 
     public void Delete(Transform puyo)
@@ -188,11 +169,17 @@ public class Grid : MonoBehaviour
                 {
                     if (gameBoard[col, row].gameObject.GetComponent<PuyaUnit>().forcedDownwards)
                     {
+                        Debug.Log("fd");
                         return true;
                     }
                     else if (gameBoard[col, row].gameObject.GetComponent<PuyaUnit>().activelyFalling)
                     {
+                        Debug.Log("af");
                         return true;
+                    }
+                    else
+                    {
+                        Debug.Log("no falling blocs");
                     }
                 }
             }
@@ -200,6 +187,26 @@ public class Grid : MonoBehaviour
 
         return false;
     }
+
+
+    public Vector3 worldPosToGridPos(Vector3 pos)
+    {
+        Vector3 posRetour = new Vector3();
+
+        if (gameObject.transform.position.x < 0)//grille de gauche  position:-600,0  size:450,900
+        {
+            posRetour.x = Convert.ToInt32((pos.x - (-3.8f)) / -0.7f);
+            posRetour.y = Convert.ToInt32((pos.y - 3.8f) / -0.7f);
+        }
+        else
+        {
+            posRetour.x = Convert.ToInt32((pos.x - 3.8f) / 0.7f);
+            posRetour.y = Convert.ToInt32((pos.y - 3.8f) / 0.7f);
+        }
+        //Debug.Log(posRetour);
+        return posRetour;
+    }
+
 
     public void DebugBoard()
     {
