@@ -565,7 +565,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 430901061}
-  - {fileID: 956047000}
   - {fileID: 956514006}
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -2243,6 +2242,7 @@ GameObject:
   m_Component:
   - component: {fileID: 430901061}
   - component: {fileID: 430901062}
+  - component: {fileID: 430901063}
   m_Layer: 5
   m_Name: GamePlay
   m_TagString: Untagged
@@ -2279,6 +2279,7 @@ RectTransform:
   - {fileID: 1367164587}
   - {fileID: 226629999}
   - {fileID: 1315037687}
+  - {fileID: 956047000}
   m_Father: {fileID: 70332885}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2300,7 +2301,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grid1: {fileID: 591141627}
-  grid2: {fileID: 1001692256}
+  ControlleurP1: 1
+  posSpawnP1: {x: -5.9, y: -5.2}
+  posSpawnP2: {x: 5.2, y: 5.9}
+--- !u!114 &430901063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430901060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c62f3d0dff6f9f148a64ec517011eafa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grid1: {fileID: 1001692256}
+  ControlleurP1: 0
   posSpawnP1: {x: -5.9, y: -5.2}
   posSpawnP2: {x: 5.2, y: 5.9}
 --- !u!1 &503620636
@@ -3710,8 +3727,8 @@ Transform:
   - {fileID: 1723793299}
   - {fileID: 419472444}
   - {fileID: 247018842}
-  m_Father: {fileID: 70332885}
-  m_RootOrder: 1
+  m_Father: {fileID: 430901061}
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &956514005
 GameObject:
@@ -3750,7 +3767,7 @@ Transform:
   - {fileID: 2017073797}
   - {fileID: 2086275075}
   m_Father: {fileID: 70332885}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &984118767
 GameObject:

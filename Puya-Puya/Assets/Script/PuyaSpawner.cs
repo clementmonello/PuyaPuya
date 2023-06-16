@@ -6,7 +6,7 @@ public class PuyaSpawner : MonoBehaviour
 {
     private BlocPuya activePuyo;
     public Grid grid1;
-    public Grid grid2;
+    public bool ControlleurP1;
     public Vector2 posSpawnP1 = new Vector2(-5.9f, -5.2f);
     public Vector2 posSpawnP2 = new Vector2(5.2f, 5.9f);
 
@@ -55,9 +55,10 @@ public class PuyaSpawner : MonoBehaviour
         else
         {
             Debug.Log("spawn");
-            activePuyo = Instantiate((GameObject)Resources.Load("Puya"), posSpawnP1, Quaternion.identity).GetComponent<BlocPuya>();
+            activePuyo = Instantiate((GameObject)Resources.Load("Puya"), ControlleurP1 == true? posSpawnP1:posSpawnP2, Quaternion.identity).GetComponent<BlocPuya>();
             activePuyo.grid = grid1;
             activePuyo.ps = this;
+            activePuyo.GetComponent<PlayerController>().ControlleurP1 = ControlleurP1;
         }
         //grid1.DebugBoard();
     }
