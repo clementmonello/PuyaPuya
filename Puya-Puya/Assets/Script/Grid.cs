@@ -17,7 +17,7 @@ public class Grid : MonoBehaviour
     }
     public bool FreeSpace(Vector3 target, Transform parentTransform)
     {
-        Vector3 v = worldPosToGridPos(target);
+        Vector3 v = WorldPosToGridPos(target);
         if (WithinBorders(v))
         {
             return gameBoard[Convert.ToInt32(v.x), Convert.ToInt32(v.y)] == null ||
@@ -52,7 +52,7 @@ public class Grid : MonoBehaviour
 
     public void Clear(float col, float row)
     {
-        Vector3 v=worldPosToGridPos(new Vector3(col,row));
+        Vector3 v=WorldPosToGridPos(new Vector3(col,row));
 
         print(row);
         print(col);
@@ -67,7 +67,7 @@ public class Grid : MonoBehaviour
 
     public void Add(float col, float row, Transform obj)
     {
-        Vector3 v = worldPosToGridPos(new Vector3(col, row));
+        Vector3 v = WorldPosToGridPos(new Vector3(col, row));
 
         gameBoard[Convert.ToInt32(v.x), Convert.ToInt32(v.y)] = obj;
     }
@@ -200,7 +200,7 @@ public class Grid : MonoBehaviour
     }
 
 
-    public Vector3 worldPosToGridPos(Vector3 pos)
+    public Vector3 WorldPosToGridPos(Vector3 pos)
     {
         Vector3 posRetour = new Vector3();
         if (gameObject.transform.position.x < 0)//grille de gauche  position:-600,0  size:450,900

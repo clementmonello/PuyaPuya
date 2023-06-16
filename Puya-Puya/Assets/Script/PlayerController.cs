@@ -25,11 +25,11 @@ public class PlayerController : MonoBehaviour
         {
             puya.MoveDown();
         }
-        else if (Input.GetKeyDown("z"))
+        else if (Input.GetKeyDown(KeyCode.A))
         {
             puya.RotateLeft();
         }
-        else if (Input.GetKeyDown("x"))
+        else if (Input.GetKeyDown(KeyCode.E))
         {
             puya.RotateRight();
         }

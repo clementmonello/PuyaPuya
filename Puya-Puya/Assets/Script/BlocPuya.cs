@@ -90,6 +90,8 @@ public class BlocPuya : MonoBehaviour
     public void RotateLeft()
     {
         Vector3 vect = GetClockwiseRotationVector();
+
+        print("vector rotate :"+vect);
         if (ValidRotate(vect))
         {
             Move(vect, unitArray[1].transform);
@@ -130,45 +132,49 @@ public class BlocPuya : MonoBehaviour
 
     Vector3 GetClockwiseRotationVector()
     {
-        Vector3 puyaUnitPos = RoundVector(unitArray[1].transform.position);
+        Vector3 puyaUnitPos = unitArray[1].transform.position;
+        print("puyaUnitPos" + puyaUnitPos);
 
-        if (Vector3.Distance(puyaUnitPos + left, transform.position) == 0)
+        if (Vector3.Distance(puyaUnitPos + left * gridStep, unitArray[0].transform.position) < 0.1f)
         {
             return new Vector3(-1, -1);
         }
-        else if (Vector3.Distance(puyaUnitPos + up, transform.position) == 0)
+        else if (Vector3.Distance(puyaUnitPos + up * gridStep, unitArray[0].transform.position) < 0.1f)
         {
             return new Vector3(-1, +1);
         }
-        else if (Vector3.Distance(puyaUnitPos + right, transform.position) == 0)
+        else if (Vector3.Distance(puyaUnitPos + right * gridStep, unitArray[0].transform.position) < 0.1f)
         {
             return new Vector3(+1, +1);
         }
-        else if (Vector3.Distance(puyaUnitPos + down, transform.position) == 0)
+        else if (Vector3.Distance(puyaUnitPos + down * gridStep, unitArray[0].transform.position) < 0.1f)
         {
             return new Vector3(+1, -1);
         }
-
-        return new Vector3(0, 0);
+        else { return new Vector3(0, 0); }
+        
     }
 
     Vector3 GetCounterClockwiseRotationVector()
     {
-        Vector3 puyaUnitPos = RoundVector(unitArray[1].transform.position);
+        Vector3 puyaUnitPos = unitArray[1].transform.position;
 
-        if (Vector3.Distance(puyaUnitPos + left, transform.position) == 0)
+        print("RoundVector"+puyaUnitPos);
+        print("Position"+unitArray[0].transform.position);
+
+        if (Vector3.Distance(puyaUnitPos + left * gridStep, unitArray[0].transform.position) < 0.1f)
         {
-            return new Vector3(-1, +1);
+             return new Vector3(-1, +1);
         }
-        else if (Vector3.Distance(puyaUnitPos + up, transform.position) == 0)
+        else if (Vector3.Distance(puyaUnitPos + up * gridStep, unitArray[0].transform.position) < 0.1f)
         {
             return new Vector3(+1, +1);
         }
-        else if (Vector3.Distance(puyaUnitPos + right, transform.position) == 0)
+        else if (Vector3.Distance(puyaUnitPos + right * gridStep, unitArray[0].transform.position) < 0.1f)
         {
             return new Vector3(+1, -1);
         }
-        else if (Vector3.Distance(puyaUnitPos + down, transform.position) == 0)
+        else if (Vector3.Distance(puyaUnitPos + down * gridStep, unitArray[0].transform.position) < 0.1f)
         {
             return new Vector3(-1, -1);
         }
