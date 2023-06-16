@@ -53,15 +53,12 @@ public class Grid : MonoBehaviour
 
     public void Clear(float col, float row)
     {
-<<<<<<< Updated upstream
+
         Vector3 v=WorldPosToGridPos(new Vector3(col,row));
 
         print(row);
         print(col);
         print(v);
-=======
-        Vector3 v = WorldPosToGridPos(new Vector3(col, row));
->>>>>>> Stashed changes
 
         gameBoard[Convert.ToInt32(v.x), Convert.ToInt32(v.y)] = null;
     }
@@ -219,10 +216,6 @@ public void AddNeighbors(Transform currentUnit, List<Transform> currentGroup)
         return false;
     }
 
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
     public Vector3 WorldPosToGridPos(Vector3 pos)
     {
         Vector3 posRetour = new Vector3();
