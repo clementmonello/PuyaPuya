@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 183930506}
   - component: {fileID: 183930505}
   m_Layer: 5
-  m_Name: PinkPlayerIcon
+  m_Name: PinkCharacterIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -282,14 +282,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 984811340}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 984811342}
+        m_TargetAssemblyTypeName: SelectionManager, Assembly-CSharp
+        m_MethodName: SelectCharacter
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -497,7 +497,7 @@ GameObject:
   - component: {fileID: 556433478}
   - component: {fileID: 556433477}
   m_Layer: 5
-  m_Name: GreenPlayerIcon
+  m_Name: GreenCharacterIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -567,14 +567,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 984811340}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 984811342}
+        m_TargetAssemblyTypeName: SelectionManager, Assembly-CSharp
+        m_MethodName: SelectCharacter
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -617,6 +617,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 556433475}
   m_CullTransparentMesh: 1
+--- !u!1 &673922999
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 673923001}
+  - component: {fileID: 673923000}
+  m_Layer: 0
+  m_Name: SelectionManagerP2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &673923000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673922999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51a743d46e6410841a5b1bcc610112d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterButtons:
+  - {fileID: 1822652331}
+  - {fileID: 556433477}
+  - {fileID: 183930505}
+  - {fileID: 1092439807}
+  selectedCharacter: {fileID: 387886459}
+  okBanner: {fileID: 1741383579}
+  characterImages:
+  - {fileID: 21300000, guid: b29bbfe88bebbbf43acda6d6021e4423, type: 3}
+  - {fileID: 21300000, guid: 79e3c724eec6a4d4fa2ba61f73333bf9, type: 3}
+  - {fileID: 21300000, guid: 36e4ac3b29874b54496dbac0b87213c8, type: 3}
+  - {fileID: 21300000, guid: d4cbb66c5c58df14690b5dc60b92b7f7, type: 3}
+  selectedCharacterData: {fileID: 0}
+--- !u!4 &673923001
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673922999}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1022.3688, y: 441.9184, z: -1562.9966}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &749795570
 GameObject:
   m_ObjectHideFlags: 0
@@ -800,7 +857,7 @@ GameObject:
   - component: {fileID: 984811341}
   - component: {fileID: 984811342}
   m_Layer: 0
-  m_Name: SelectionManager
+  m_Name: SelectionManagerP1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -813,8 +870,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 984811340}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 998.74554, y: 459.15918, z: -7.9922624}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1022.3688, y: 441.9184, z: -1562.9966}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -838,12 +895,14 @@ MonoBehaviour:
   - {fileID: 556433477}
   - {fileID: 183930505}
   - {fileID: 1092439807}
-  selectedCharacters:
-  - {fileID: 1937046632}
-  - {fileID: 387886459}
-  okBanners:
-  - {fileID: 1671940490}
-  - {fileID: 1741383579}
+  selectedCharacter: {fileID: 1937046632}
+  okBanner: {fileID: 1671940490}
+  characterImages:
+  - {fileID: 21300000, guid: b29bbfe88bebbbf43acda6d6021e4423, type: 3}
+  - {fileID: 21300000, guid: 79e3c724eec6a4d4fa2ba61f73333bf9, type: 3}
+  - {fileID: 21300000, guid: 36e4ac3b29874b54496dbac0b87213c8, type: 3}
+  - {fileID: 21300000, guid: d4cbb66c5c58df14690b5dc60b92b7f7, type: 3}
+  selectedCharacterData: {fileID: 0}
 --- !u!1 &987728025
 GameObject:
   m_ObjectHideFlags: 0
@@ -971,7 +1030,7 @@ GameObject:
   - component: {fileID: 1092439808}
   - component: {fileID: 1092439807}
   m_Layer: 5
-  m_Name: PurplePlayerIcon
+  m_Name: PurpleCharacterIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1041,14 +1100,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 984811340}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 984811342}
+        m_TargetAssemblyTypeName: SelectionManager, Assembly-CSharp
+        m_MethodName: SelectCharacter
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1195,7 +1254,7 @@ RectTransform:
   m_GameObject: {fileID: 1671940490}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.59999996, y: 0.59999996, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2075448263}
@@ -1203,8 +1262,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -829, y: -310}
-  m_SizeDelta: {x: 240, y: 205}
+  m_AnchoredPosition: {x: -679, y: -310}
+  m_SizeDelta: {x: 700, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1671940492
 MonoBehaviour:
@@ -1270,7 +1329,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b29bbfe88bebbbf43acda6d6021e4423, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 91947e81b1c98e74696890319c200368, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1510,7 +1569,7 @@ RectTransform:
   m_GameObject: {fileID: 1741383579}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.59999996, y: 0.59999996, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2075448263}
@@ -1518,8 +1577,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 822, y: -310}
-  m_SizeDelta: {x: 240, y: 205}
+  m_AnchoredPosition: {x: 673, y: -301}
+  m_SizeDelta: {x: 700, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1741383581
 MonoBehaviour:
@@ -1585,7 +1644,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 36e4ac3b29874b54496dbac0b87213c8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 01e4ffaf459b697408b2b8a6afa7a54f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1616,7 +1675,7 @@ GameObject:
   - component: {fileID: 1822652332}
   - component: {fileID: 1822652331}
   m_Layer: 5
-  m_Name: BlueSkyPlayerIcon
+  m_Name: BlueSkyCharacterIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1686,13 +1745,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 984811340}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 984811342}
+        m_TargetAssemblyTypeName: SelectionManager, Assembly-CSharp
+        m_MethodName: SelectCharacter
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1794,7 +1853,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b29bbfe88bebbbf43acda6d6021e4423, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

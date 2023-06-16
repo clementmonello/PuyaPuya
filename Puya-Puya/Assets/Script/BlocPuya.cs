@@ -7,6 +7,7 @@ public class BlocPuya : MonoBehaviour
     public GameObject[] unitArray = new GameObject[2];
 
     public float fallSpeed = 1;
+
     public float interval = 0;
 
     private Vector3 left = Vector3.left;
@@ -14,15 +15,40 @@ public class BlocPuya : MonoBehaviour
     private Vector3 down = Vector3.down;
     private Vector3 up = Vector3.up;
 
+    private float gridStep = 0.7f;
+
     private bool puyoUnitDropsFinished = false;
+
+    public PuyaSpawner ps;
+
+    public Grid grid;
 
     void Start()
     {
-        unitArray[0] = Instantiate((GameObject)Resources.Load("PuyaUnit"), transform.position, Quaternion.identity);
-        unitArray[1] = Instantiate((GameObject)Resources.Load("PuyaUnit"), new Vector2(transform.position.x + 1, transform.position.y), Quaternion.identity);
+        if (transform.position.x < 0)
+        {
+            unitArray[0] = Instantiate(GetRandomPuyaPrefab(), new Vector2(ps.posSpawnP1.x, 3.8f), Quaternion.identity);
+            unitArray[1] = Instantiate(GetRandomPuyaPrefab(), new Vector2(ps.posSpawnP1.y, 3.8f), Quaternion.identity);
+        }
+        else
+        {
+            unitArray[0] = Instantiate(GetRandomPuyaPrefab(), new Vector2(ps.posSpawnP2.x, 3.8f), Quaternion.identity);
+            unitArray[1] = Instantiate(GetRandomPuyaPrefab(), new Vector2(ps.posSpawnP2.y, 3.8f), Quaternion.identity);
+        }
         unitArray[0].transform.parent = gameObject.transform;
         unitArray[1].transform.parent = gameObject.transform;
+        unitArray[0].GetComponent<PuyaUnit>().grid = grid;
+        unitArray[1].GetComponent<PuyaUnit>().grid = grid;
         UpdateGameBoard();
+    }
+
+    GameObject GetRandomPuyaPrefab()
+    {
+        string[] puyoPrefabNames = { "PuyaUnitBlue", "PuyaUnitGreen", "PuyaUnitViolet", "PuyaUnitYellow", "PuyaUnitRed" };
+
+        string randomPrefabName = puyoPrefabNames[Random.Range(0, puyoPrefabNames.Length)];
+
+        return (GameObject)Resources.Load(randomPrefabName);
     }
 
     void Update()
@@ -31,6 +57,7 @@ public class BlocPuya : MonoBehaviour
     }
 
     void AutoDrop()
+
     {
         if (interval > fallSpeed)
         {
@@ -75,6 +102,7 @@ public class BlocPuya : MonoBehaviour
     public void RotateLeft()
     {
         Vector3 vect = GetClockwiseRotationVector();
+
         if (ValidRotate(vect))
         {
             Move(vect, unitArray[1].transform);
@@ -93,7 +121,7 @@ public class BlocPuya : MonoBehaviour
     void Move(Vector3 vector, Transform target)
     {
         ClearCurrentGameboardPosition();
-        target.position += vector;
+        target.position += vector*gridStep;
         UpdateGameBoard();
     }
 
@@ -101,7 +129,8 @@ public class BlocPuya : MonoBehaviour
     {
         foreach (Transform puyaUnit in transform)
         {
-            Grid.Clear(puyaUnit.transform.position.x, puyaUnit.transform.position.y);
+
+            grid.Clear(puyaUnit.transform.position.x, puyaUnit.transform.position.y);
         }
     }
 
@@ -109,51 +138,56 @@ public class BlocPuya : MonoBehaviour
     {
         foreach (Transform puyaUnit in transform)
         {
-            Grid.Add(puyaUnit.position.x, puyaUnit.position.y, puyaUnit);
+
+            grid.Add(puyaUnit.position.x, puyaUnit.position.y, puyaUnit);
         }
     }
 
     Vector3 GetClockwiseRotationVector()
     {
-        Vector3 puyaUnitPos = RoundVector(unitArray[1].transform.position);
+        Vector3 puyaUnitPos = unitArray[1].transform.position;
+        print("puyaUnitPos" + puyaUnitPos);
 
-        if (Vector3.Distance(puyaUnitPos + left, transform.position) == 0)
+        if (Vector3.Distance(puyaUnitPos + left * gridStep, unitArray[0].transform.position) < 0.1f)
         {
             return new Vector3(-1, -1);
         }
-        else if (Vector3.Distance(puyaUnitPos + up, transform.position) == 0)
+        else if (Vector3.Distance(puyaUnitPos + up * gridStep, unitArray[0].transform.position) < 0.1f)
         {
             return new Vector3(-1, +1);
         }
-        else if (Vector3.Distance(puyaUnitPos + right, transform.position) == 0)
+        else if (Vector3.Distance(puyaUnitPos + right * gridStep, unitArray[0].transform.position) < 0.1f)
         {
             return new Vector3(+1, +1);
         }
-        else if (Vector3.Distance(puyaUnitPos + down, transform.position) == 0)
+        else if (Vector3.Distance(puyaUnitPos + down * gridStep, unitArray[0].transform.position) < 0.1f)
         {
             return new Vector3(+1, -1);
         }
-
-        return new Vector3(0, 0);
+        else { return new Vector3(0, 0); }
+        
     }
 
     Vector3 GetCounterClockwiseRotationVector()
     {
-        Vector3 puyaUnitPos = RoundVector(unitArray[1].transform.position);
+        Vector3 puyaUnitPos = unitArray[1].transform.position;
 
-        if (Vector3.Distance(puyaUnitPos + left, transform.position) == 0)
+        print("RoundVector"+puyaUnitPos);
+        print("Position"+unitArray[0].transform.position);
+
+        if (Vector3.Distance(puyaUnitPos + left * gridStep, unitArray[0].transform.position) < 0.1f)
         {
-            return new Vector3(-1, +1);
+             return new Vector3(-1, +1);
         }
-        else if (Vector3.Distance(puyaUnitPos + up, transform.position) == 0)
+        else if (Vector3.Distance(puyaUnitPos + up * gridStep, unitArray[0].transform.position) < 0.1f)
         {
             return new Vector3(+1, +1);
         }
-        else if (Vector3.Distance(puyaUnitPos + right, transform.position) == 0)
+        else if (Vector3.Distance(puyaUnitPos + right * gridStep, unitArray[0].transform.position) < 0.1f)
         {
             return new Vector3(+1, -1);
         }
-        else if (Vector3.Distance(puyaUnitPos + down, transform.position) == 0)
+        else if (Vector3.Distance(puyaUnitPos + down * gridStep, unitArray[0].transform.position) < 0.1f)
         {
             return new Vector3(-1, -1);
         }
@@ -169,13 +203,12 @@ public class BlocPuya : MonoBehaviour
 
   
 
-    bool ValidMove(Vector3 direction)
+    public bool ValidMove(Vector3 direction)
     {
         foreach (Transform puya in transform)
         {
-            Vector3 newPosition = new Vector3(puya.position.x + direction.x, puya.position.y + direction.y, 0);
-
-            if (!Grid.FreeSpace(newPosition, transform))
+            Vector3 newPosition = new Vector3(puya.position.x + direction.x* gridStep, puya.position.y + direction.y* gridStep, 0);
+            if (!grid.FreeSpace(newPosition, transform))
             {
                 return false;
             }
@@ -187,7 +220,8 @@ public class BlocPuya : MonoBehaviour
     {
         Vector3 puyaPos = unitArray[1].transform.position;
         Vector3 newPosition = new Vector3(puyaPos.x + direction.x, puyaPos.y + direction.y);
-        return Grid.FreeSpace(newPosition, transform);
+
+        return grid.FreeSpace(newPosition, transform);
     }
 
     private void DropPuyaUnits()
@@ -216,6 +250,6 @@ public class BlocPuya : MonoBehaviour
     {
         yield return new WaitUntil(() => !ActivelyFalling());
 
-        GameObject.Find("PuyaSpawner").GetComponent<PuyaSpawner>().SpawnPuyo();
+        ps.SpawnPuyo();
     }
 }

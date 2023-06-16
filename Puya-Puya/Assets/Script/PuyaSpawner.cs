@@ -6,6 +6,11 @@ public class PuyaSpawner : MonoBehaviour
 {
     private BlocPuya activePuyo;
 
+    public Grid grid1;
+    public Grid grid2;
+    public Vector2 posSpawnP1 = new Vector2(-5.9f, -5.2f);
+    public Vector2 posSpawnP2 = new Vector2(5.2f, 5.9f);
+
     void Start()
     {
         SpawnPuyo();
@@ -13,7 +18,8 @@ public class PuyaSpawner : MonoBehaviour
 
     public void SpawnPuyo()
     {
-        if (Grid.WhatToDelete())
+
+        if (grid1.WhatToDelete())
         {
             StartCoroutine(DelayDelete());
         }
@@ -24,32 +30,37 @@ public class PuyaSpawner : MonoBehaviour
     private bool GameIsOver()
     {
         return
-            Grid.gameBoard[(int)transform.position.x, (int)transform.position.y] != null ||
-            Grid.gameBoard[(int)transform.position.x + 1, (int)transform.position.y] != null;
+
+            grid1.gameBoard[2, 0] != null ||
+            grid1.gameBoard[3, 0] != null;
     }
 
-    IEnumerator DelayDelete()
+    IEnumerator DelayDelete() //ici c'est les combos
     {
-        Grid.DropAllColumns();
-        yield return new WaitUntil(() => !Grid.AnyFallingBlocks());
-        if (Grid.WhatToDelete())
+        grid1.DropAllColumns();
+        yield return new WaitUntil(() => !grid1.AnyFallingBlocks());
+        if (grid1.WhatToDelete())
         {
             StartCoroutine(DelayDelete());
         };
-
     }
 
     IEnumerator DelaySpawn()
     {
-        yield return new WaitUntil(() => !Grid.AnyFallingBlocks() && !Grid.WhatToDelete());
+
+        yield return new WaitUntil(() => !grid1.AnyFallingBlocks() && !grid1.WhatToDelete());
         if (GameIsOver())
         {
-            GameObject.Find("GameOverCanvas").GetComponent<CanvasGroup>().alpha = 1;
             enabled = false;
+            Debug.Log("game over");
         }
         else
         {
-            activePuyo = Instantiate((GameObject)Resources.Load("Puya"), transform.position, Quaternion.identity).GetComponent<BlocPuya>();
+            Debug.Log("spawn");
+            activePuyo = Instantiate((GameObject)Resources.Load("Puya"), posSpawnP1, Quaternion.identity).GetComponent<BlocPuya>();
+            activePuyo.grid = grid1;
+            activePuyo.ps = this;
         }
+        //grid1.DebugBoard();
     }
 }
