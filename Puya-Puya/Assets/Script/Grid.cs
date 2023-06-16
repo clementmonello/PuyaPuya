@@ -54,7 +54,15 @@ public class Grid : MonoBehaviour
     {
         Vector3 v=worldPosToGridPos(new Vector3(col,row));
 
+        print(row);
+        print(col);
+        print(v);
+
         gameBoard[Convert.ToInt32(v.x), Convert.ToInt32(v.y)] = null;
+    }
+    public void ClearByGridPos(int col, int row)
+    {
+        gameBoard[col, row] = null;
     }
 
     public void Add(float col, float row, Transform obj)
@@ -63,7 +71,10 @@ public class Grid : MonoBehaviour
 
         gameBoard[Convert.ToInt32(v.x), Convert.ToInt32(v.y)] = obj;
     }
-
+    public void AddByGridPos(int col, int row, Transform obj)
+    {
+        gameBoard[col, row] = obj;
+    }
     public void Delete(Transform puyo)
     {
         Vector2 pos = new Vector2(Mathf.Round(puyo.position.x), Mathf.Round(puyo.position.y));
@@ -192,7 +203,6 @@ public class Grid : MonoBehaviour
     public Vector3 worldPosToGridPos(Vector3 pos)
     {
         Vector3 posRetour = new Vector3();
-
         if (gameObject.transform.position.x < 0)//grille de gauche  position:-600,0  size:450,900
         {
             posRetour.x = Convert.ToInt32((pos.x - (-3.8f)) / -0.7f);

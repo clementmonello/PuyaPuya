@@ -23,26 +23,27 @@ public class PuyaUnit : MonoBehaviour
     {
         WaitForSeconds wait = new WaitForSeconds(.25f);
         Vector3 currentPos = worldPosToGridPos(RoundVector(gameObject.transform.position));
-        for (int row = Convert.ToInt32(currentPos.x) - 1; row >= 0; row--)
+        print("CurrentPos : " + currentPos);
+        for (int row = Convert.ToInt32(currentPos.y) +1; row <12; row++)
         {
-            int currentY = Convert.ToInt32(currentPos.y);
+            int currentY = Convert.ToInt32(currentPos.x);
             Debug.Log("currentX " + currentY);
             Debug.Log("ligne " + row);
             if (grid.IsEmpty(currentY, row))
             {
                 forcedDownwards = true;
-                grid.Clear(currentY, row + 1);
-                grid.Add(currentY, row, gameObject.transform);
+                grid.ClearByGridPos(currentY, row-1);
+                grid.AddByGridPos(currentY, row, gameObject.transform);
                 gameObject.transform.position += Vector3.down*gridStep;
                 yield return wait;
             }
             else
             {
-                activelyFalling = false;
-                forcedDownwards = false;
                 break;
             }
         }
+        activelyFalling = false;
+        forcedDownwards = false;
     }
 
     public void DropToFloorExternal()

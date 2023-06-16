@@ -228,9 +228,7 @@ public class BlocPuya : MonoBehaviour
 
     IEnumerator SpawnNextBlock()
     {
-        Debug.Log("1");
         yield return new WaitUntil(() => !ActivelyFalling());
-        Debug.Log("2");
         ps.SpawnPuyo();
     }
 }
