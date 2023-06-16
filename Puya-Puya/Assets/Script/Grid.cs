@@ -9,6 +9,7 @@ public class Grid : MonoBehaviour
 
     public Transform[,] gameBoard = new Transform[6, 12];
 
+
     public bool WithinBorders(Vector3 target)
     {
         return Convert.ToInt32(target.x) > -1 &&
@@ -53,7 +54,7 @@ public class Grid : MonoBehaviour
         return !IsEmpty((int)newPos.x, (int)newPos.y) && ColorMatches((int)newPos.x, (int)newPos.y, puyoUnitTransform);
     }
 
-    
+
     public void Clear(float col, float row)
     {
 
@@ -96,7 +97,7 @@ public class Grid : MonoBehaviour
             gameBoard[col, row] = null;
             UnityEngine.Object.Destroy(puyo.gameObject);
         }
-        
+
     }
 
     public bool WhatToDelete()
@@ -179,6 +180,7 @@ public void AddNeighbors(Transform currentUnit, List<Transform> currentGroup)
             Transform nextUnit = gameBoard[(int)gridPos.x, (int)gridPos.y];
 
             // Ajouter des messages de débogage ici
+
             Debug.Log("Neighbor detected at (" + (int)gridPos.x + ", " + (int)gridPos.y + ")");
 
             AddNeighbors(nextUnit, currentGroup);
@@ -226,7 +228,6 @@ public void AddNeighbors(Transform currentUnit, List<Transform> currentGroup)
         return false;
     }
 
-
     public Vector3 WorldPosToGridPos(Vector3 pos)
     {
         Vector3 posRetour = new Vector3();
@@ -241,6 +242,7 @@ public void AddNeighbors(Transform currentUnit, List<Transform> currentGroup)
             posRetour.y = Convert.ToInt32((pos.y - 3.8f) / 0.7f);
         }
         return posRetour;
+
     }
 
 }
