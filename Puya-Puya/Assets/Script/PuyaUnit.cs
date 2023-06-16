@@ -22,7 +22,11 @@ public class PuyaUnit : MonoBehaviour
     public IEnumerator DropToFloor()
     {
         WaitForSeconds wait = new WaitForSeconds(.25f);
+<<<<<<< Updated upstream
         Vector3 currentPos = WorldPosToGridPos(RoundVector(gameObject.transform.position));
+=======
+        Vector3 currentPos = worldPosToGridPos(gameObject.transform.position);
+>>>>>>> Stashed changes
         print("CurrentPos : " + currentPos);
         for (int row = Convert.ToInt32(currentPos.y) +1; row <12; row++)
         {
@@ -49,7 +53,7 @@ public class PuyaUnit : MonoBehaviour
     public void DropToFloorExternal()
     {
         StartCoroutine(DropToFloor());
-    }
+    } 
 
     public Vector3 WorldPosToGridPos(Vector3 pos)
     {

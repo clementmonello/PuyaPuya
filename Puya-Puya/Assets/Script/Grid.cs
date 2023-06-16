@@ -15,6 +15,7 @@ public class Grid : MonoBehaviour
             Convert.ToInt32(target.y) > -1 &&
             Convert.ToInt32(target.y) < 12;
     }
+
     public bool FreeSpace(Vector3 target, Transform parentTransform)
     {
         Vector3 v = WorldPosToGridPos(target);
@@ -52,14 +53,19 @@ public class Grid : MonoBehaviour
 
     public void Clear(float col, float row)
     {
+<<<<<<< Updated upstream
         Vector3 v=WorldPosToGridPos(new Vector3(col,row));
 
         print(row);
         print(col);
         print(v);
+=======
+        Vector3 v = WorldPosToGridPos(new Vector3(col, row));
+>>>>>>> Stashed changes
 
         gameBoard[Convert.ToInt32(v.x), Convert.ToInt32(v.y)] = null;
     }
+
     public void ClearByGridPos(int col, int row)
     {
         gameBoard[col, row] = null;
@@ -71,15 +77,25 @@ public class Grid : MonoBehaviour
 
         gameBoard[Convert.ToInt32(v.x), Convert.ToInt32(v.y)] = obj;
     }
+
     public void AddByGridPos(int col, int row, Transform obj)
     {
         gameBoard[col, row] = obj;
     }
+
     public void Delete(Transform puyo)
     {
-        Vector2 pos = new Vector2(Mathf.Round(puyo.position.x), Mathf.Round(puyo.position.y));
-        gameBoard[(int)pos.x, (int)pos.y] = null;
-        UnityEngine.Object.Destroy(puyo.gameObject);
+        Vector3 pos = puyo.position;
+        Vector3 gridPos = WorldPosToGridPos(pos);
+
+        int col = (int)gridPos.x;
+        int row = (int)gridPos.y;
+
+        if (WithinBorders(gridPos) && gameBoard[col, row] != null)
+        {
+            gameBoard[col, row] = null;
+            UnityEngine.Object.Destroy(puyo.gameObject);
+        }
     }
 
     public bool WhatToDelete()
@@ -137,30 +153,34 @@ public class Grid : MonoBehaviour
         }
     }
 
-    public void AddNeighbors(Transform currentUnit, List<Transform> currentGroup)
+public void AddNeighbors(Transform currentUnit, List<Transform> currentGroup)
+{
+    Vector3[] directions = { Vector3.up, Vector3.down, Vector3.right, Vector3.left };
+    if (currentGroup.IndexOf(currentUnit) == -1)
     {
-        Vector3[] directions = { Vector3.up, Vector3.down, Vector3.right, Vector3.left };
-        if (currentGroup.IndexOf(currentUnit) == -1)
-        {
-            currentGroup.Add(currentUnit);
-        }
-        else
-        {
-            return;
-        }
+        currentGroup.Add(currentUnit);
+    }
+    else
+    {
+        return;
+    }
 
-        foreach (Vector3 direction in directions)
-        {
-            int nextX = (int)(Mathf.Round(currentUnit.position.x) + Mathf.Round(direction.x));
-            int nextY = (int)(Mathf.Round(currentUnit.position.y) + Mathf.Round(direction.y));
+    foreach (Vector3 direction in directions)
+    {
+        Vector3 neighborPos = currentUnit.position + direction;
+        Vector3 gridPos = WorldPosToGridPos(neighborPos);
 
-            if (!IsEmpty(nextX, nextY) && ColorMatches(nextX, nextY, currentUnit))
-            {
-                Transform nextUnit = gameBoard[nextX, nextY];
-                AddNeighbors(nextUnit, currentGroup);
-            }
+        if (WithinBorders(gridPos) && !IsEmpty((int)gridPos.x, (int)gridPos.y) && ColorMatches((int)gridPos.x, (int)gridPos.y, currentUnit))
+        {
+            Transform nextUnit = gameBoard[(int)gridPos.x, (int)gridPos.y];
+
+            // Ajouter des messages de débogage ici
+            Debug.Log("Neighbor detected at (" + (int)gridPos.x + ", " + (int)gridPos.y + ")");
+
+            AddNeighbors(nextUnit, currentGroup);
         }
     }
+}
 
     public void DeleteUnits(List<Transform> unitsToDelete)
     {
@@ -190,7 +210,7 @@ public class Grid : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("no falling blocs");
+                        Debug.Log("no falling blocks");
                     }
                 }
             }
@@ -199,11 +219,14 @@ public class Grid : MonoBehaviour
         return false;
     }
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     public Vector3 WorldPosToGridPos(Vector3 pos)
     {
         Vector3 posRetour = new Vector3();
-        if (gameObject.transform.position.x < 0)//grille de gauche  position:-600,0  size:450,900
+        if (gameObject.transform.position.x < 0)
         {
             posRetour.x = Convert.ToInt32((pos.x - (-3.8f)) / -0.7f);
             posRetour.y = Convert.ToInt32((pos.y - 3.8f) / -0.7f);
@@ -213,10 +236,8 @@ public class Grid : MonoBehaviour
             posRetour.x = Convert.ToInt32((pos.x - 3.8f) / 0.7f);
             posRetour.y = Convert.ToInt32((pos.y - 3.8f) / 0.7f);
         }
-        //Debug.Log(posRetour);
         return posRetour;
     }
-
 
     public void DebugBoard()
     {
