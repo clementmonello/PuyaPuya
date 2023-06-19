@@ -17,7 +17,7 @@ public class MenuPrincipal : MonoBehaviour
     void Update()
     {
     }
-    public void PlayGame()
+    public void playGame()
     {
         PlayerPrefs.SetInt("level", 1);
         PlayerPrefs.Save();
@@ -28,11 +28,11 @@ public class MenuPrincipal : MonoBehaviour
         menuObj.SetActive(false);
         settingsObj.SetActive(true);
     }
-    public void QuitGame()
+    public void quitGame()
     {
         Application.Quit();
     }
-    public void BackToMenu()
+    public void backToMenu()
     {
         settingsObj.SetActive(false);
         menuObj.SetActive(true);

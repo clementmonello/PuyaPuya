@@ -6,15 +6,14 @@ public class BlocPuya : MonoBehaviour
 {
     public GameObject[] unitArray = new GameObject[2];
 
+    public float fallSpeed = 1;
 
-    public float fallSpeed = 10;
     public float interval = 0;
 
     private Vector3 left = Vector3.left;
     private Vector3 right = Vector3.right;
     private Vector3 down = Vector3.down;
     private Vector3 up = Vector3.up;
-    private float gridStep = 0.7f;
 
     private float gridStep = 0.7f;
 
@@ -35,7 +34,6 @@ public class BlocPuya : MonoBehaviour
         {
             unitArray[0] = Instantiate(GetRandomPuyaPrefab(), new Vector2(ps.posSpawnP2.x, 3.8f), Quaternion.identity);
             unitArray[1] = Instantiate(GetRandomPuyaPrefab(), new Vector2(ps.posSpawnP2.y, 3.8f), Quaternion.identity);
-
         }
         unitArray[0].transform.parent = gameObject.transform;
         unitArray[1].transform.parent = gameObject.transform;
@@ -105,8 +103,6 @@ public class BlocPuya : MonoBehaviour
     {
         Vector3 vect = GetClockwiseRotationVector();
 
-
-        print("vector rotate :"+vect);
         if (ValidRotate(vect))
         {
             Move(vect, unitArray[1].transform);

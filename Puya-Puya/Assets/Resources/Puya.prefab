@@ -51,7 +51,6 @@ MonoBehaviour:
   - {fileID: 552683445876342026, guid: e640a6326aef9b049a8fc46d7148361f, type: 3}
   - {fileID: 552683445876342026, guid: 72ce9e6d16fa308428319e76cf9232a3, type: 3}
   - {fileID: 552683445876342026, guid: e0ecd7431d153de4f84f961612493c0d, type: 3}
-
   fallSpeed: 1
   interval: 0
   ps: {fileID: 0}
