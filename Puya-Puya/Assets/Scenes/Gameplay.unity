@@ -590,15 +590,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e9ce75c640b16e4f9346378fcd32817, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridP1: {fileID: 591141627}
-  gridP2: {fileID: 1001692256}
-  posSpawnP1: {x: -5.9, y: -5.2}
-  posSpawnP2: {x: 5.22, y: 5.92}
-  listPuya:
-  - {fileID: 5777858834295736076, guid: 982d959ce7a0b844cb58f807bc132af1, type: 3}
-  - {fileID: 2621126211222409790, guid: e933984e272083a44b83190288d5e909, type: 3}
-  - {fileID: 4891419045322729085, guid: d5ff8a37917c5ef4fa6093e0ebfa3b46, type: 3}
-  - {fileID: 1918675833559265516, guid: cf363345c86be1f41a72dfb864ac443f, type: 3}
 --- !u!1 &74976920
 GameObject:
   m_ObjectHideFlags: 0
@@ -2267,6 +2258,7 @@ GameObject:
   m_Component:
   - component: {fileID: 430901061}
   - component: {fileID: 430901062}
+  - component: {fileID: 430901063}
   m_Layer: 5
   m_Name: GamePlay
   m_TagString: Untagged
@@ -2320,20 +2312,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 430901060}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e9ce75c640b16e4f9346378fcd32817, type: 3}
+  m_Script: {fileID: 11500000, guid: c62f3d0dff6f9f148a64ec517011eafa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridP1: {fileID: 0}
-  gridP2: {fileID: 0}
+  grid1: {fileID: 591141627}
+  ControlleurP1: 1
   posSpawnP1: {x: -5.9, y: -5.2}
-  posSpawnP2: {x: 5.22, y: 5.92}
-  listPuya:
-  - {fileID: 5777858834295736076, guid: 982d959ce7a0b844cb58f807bc132af1, type: 3}
-  - {fileID: 2621126211222409790, guid: e933984e272083a44b83190288d5e909, type: 3}
-  - {fileID: 4812801092764836886, guid: 41aa6c1968655bf40a884c8f967232be, type: 3}
-  - {fileID: 7094960630248261034, guid: f2ec5fb717b3e964ba7dfccb1f80dc00, type: 3}
-  - {fileID: 4891419045322729085, guid: d5ff8a37917c5ef4fa6093e0ebfa3b46, type: 3}
-  - {fileID: 1918675833559265516, guid: cf363345c86be1f41a72dfb864ac443f, type: 3}
+  posSpawnP2: {x: 5.2, y: 5.9}
+--- !u!114 &430901063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430901060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c62f3d0dff6f9f148a64ec517011eafa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grid1: {fileID: 1001692256}
+  ControlleurP1: 0
+  posSpawnP1: {x: -5.9, y: -5.2}
+  posSpawnP2: {x: 5.2, y: 5.9}
 --- !u!1 &503620636
 GameObject:
   m_ObjectHideFlags: 0
