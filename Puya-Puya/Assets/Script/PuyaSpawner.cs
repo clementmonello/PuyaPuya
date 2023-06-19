@@ -6,11 +6,14 @@ public class PuyaSpawner : MonoBehaviour
 {
     private BlocPuya activePuyo;
     public Grid grid1;
-    public Grid grid2;
     public bool ControlleurP1;
     public Vector2 posSpawnP1 = new Vector2(-5.9f, -5.2f);
     public Vector2 posSpawnP2 = new Vector2(5.2f, 5.9f);
 
+    public Grid grid1;
+    public Grid grid2;
+    public Vector2 posSpawnP1 = new Vector2(-5.9f, -5.2f);
+    public Vector2 posSpawnP2 = new Vector2(5.2f, 5.9f);
 
     void Start()
     {
@@ -29,7 +32,7 @@ public class PuyaSpawner : MonoBehaviour
 
     private bool GameIsOver()
     {
-       // grid1.DebugBoard();
+        grid1.DebugBoard();
         return
 
             grid1.gameBoard[2, 0] != null ||
