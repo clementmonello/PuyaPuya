@@ -27,7 +27,6 @@ public class PuyaSpawner : MonoBehaviour
 
     private bool GameIsOver()
     {
-        grid1.DebugBoard();
         return
             grid1.gameBoard[2, 0] != null ||
             grid1.gameBoard[3, 0] != null;
@@ -41,7 +40,6 @@ public class PuyaSpawner : MonoBehaviour
         {
             StartCoroutine(DelayDelete());
         };
-
     }
 
     IEnumerator DelaySpawn()
@@ -55,7 +53,7 @@ public class PuyaSpawner : MonoBehaviour
         else
         {
             Debug.Log("spawn");
-            activePuyo = Instantiate((GameObject)Resources.Load("Puya"), ControlleurP1 == true ? posSpawnP1 : posSpawnP2, Quaternion.identity).GetComponent<BlocPuya>();
+            activePuyo = Instantiate((GameObject)Resources.Load("Puya"), ControlleurP1 == true? posSpawnP1:posSpawnP2, Quaternion.identity).GetComponent<BlocPuya>();
             activePuyo.grid = grid1;
             activePuyo.ps = this;
             activePuyo.GetComponent<PlayerController>().ControlleurP1 = ControlleurP1;

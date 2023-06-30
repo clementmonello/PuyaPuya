@@ -51,10 +51,13 @@ public class Grid : MonoBehaviour
         return !IsEmpty((int)newPos.x, (int)newPos.y) && ColorMatches((int)newPos.x, (int)newPos.y, puyoUnitTransform);
     }
 
+
+
+    
     public void Clear(float col, float row)
     {
 
-        Vector3 v = WorldPosToGridPos(new Vector3(col, row));
+        Vector3 v=WorldPosToGridPos(new Vector3(col,row));
 
         print(row);
         print(col);
@@ -93,6 +96,7 @@ public class Grid : MonoBehaviour
             gameBoard[col, row] = null;
             UnityEngine.Object.Destroy(puyo.gameObject);
         }
+        
     }
 
     public bool WhatToDelete()
@@ -127,6 +131,7 @@ public class Grid : MonoBehaviour
         if (groupToDelete.Count != 0)
         {
             DeleteUnits(groupToDelete);
+            DropAllColumns();
             return true;
         }
         else
@@ -137,7 +142,7 @@ public class Grid : MonoBehaviour
 
     public void DropAllColumns()
     {
-        for (int row = 0; row < 12; row++)
+        for (int row = 11; row >= 0; row--)
         {
             for (int col = 0; col < 6; col++)
             {
@@ -150,34 +155,34 @@ public class Grid : MonoBehaviour
         }
     }
 
-    public void AddNeighbors(Transform currentUnit, List<Transform> currentGroup)
+public void AddNeighbors(Transform currentUnit, List<Transform> currentGroup)
+{
+    Vector3[] directions = { Vector3.up, Vector3.down, Vector3.right, Vector3.left };
+    if (currentGroup.IndexOf(currentUnit) == -1)
     {
-        Vector3[] directions = { Vector3.up, Vector3.down, Vector3.right, Vector3.left };
-        if (currentGroup.IndexOf(currentUnit) == -1)
+        currentGroup.Add(currentUnit);
+    }
+    else
+    {
+        return;
+    }
+
+    foreach (Vector3 direction in directions)
+    {
+        Vector3 neighborPos = currentUnit.position + direction;
+        Vector3 gridPos = WorldPosToGridPos(neighborPos);
+
+        if (WithinBorders(gridPos) && !IsEmpty((int)gridPos.x, (int)gridPos.y) && ColorMatches((int)gridPos.x, (int)gridPos.y, currentUnit))
         {
-            currentGroup.Add(currentUnit);
-        }
-        else
-        {
-            return;
-        }
+            Transform nextUnit = gameBoard[(int)gridPos.x, (int)gridPos.y];
 
-        foreach (Vector3 direction in directions)
-        {
-            Vector3 neighborPos = currentUnit.position + direction;
-            Vector3 gridPos = WorldPosToGridPos(neighborPos);
+            // Ajouter des messages de dÃ©bogage ici
+            Debug.Log("Neighbor detected at (" + (int)gridPos.x + ", " + (int)gridPos.y + ")");
 
-            if (WithinBorders(gridPos) && !IsEmpty((int)gridPos.x, (int)gridPos.y) && ColorMatches((int)gridPos.x, (int)gridPos.y, currentUnit))
-            {
-                Transform nextUnit = gameBoard[(int)gridPos.x, (int)gridPos.y];
-
-                // Ajouter des messages de débogage ici
-                Debug.Log("Neighbor detected at (" + (int)gridPos.x + ", " + (int)gridPos.y + ")");
-
-                AddNeighbors(nextUnit, currentGroup);
-            }
+            AddNeighbors(nextUnit, currentGroup);
         }
     }
+}
 
     public void DeleteUnits(List<Transform> unitsToDelete)
     {
@@ -232,28 +237,5 @@ public class Grid : MonoBehaviour
         return posRetour;
     }
 
-    public void DebugBoard()
-    {
-        string res = "";
-
-        for (int row = 0; row < 12; row++)
-        {
-            res += $"{row} :";
-            for (int col = 0; col < 6; col++)
-            {
-                if (gameBoard[col, row] == null)
-                {
-                    res += "o ";
-                }
-                else
-                {
-                    int idx = gameBoard[col, row].gameObject.GetComponent<PuyaUnit>().colorIdx;
-                    string[] colorArray = { "B", "G", "Y", "V" };
-                    res += $"{colorArray[idx]} ";
-                }
-            }
-            res += "\n";
-        }
-        Debug.Log(res);
-    }
+  
 }

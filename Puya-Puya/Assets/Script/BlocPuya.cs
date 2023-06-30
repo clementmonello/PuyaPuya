@@ -25,13 +25,13 @@ public class BlocPuya : MonoBehaviour
     {
         if (transform.position.x < 0)
         {
-            unitArray[0] = Instantiate((GameObject)Resources.Load("PuyaUnit"), new Vector2(ps.posSpawnP1.x, 3.8f), Quaternion.identity);
-            unitArray[1] = Instantiate((GameObject)Resources.Load("PuyaUnit"), new Vector2(ps.posSpawnP1.y, 3.8f), Quaternion.identity);
+            unitArray[0] = Instantiate(GetRandomPuyaPrefab(), new Vector2(ps.posSpawnP1.x, 3.8f), Quaternion.identity);
+            unitArray[1] = Instantiate(GetRandomPuyaPrefab(), new Vector2(ps.posSpawnP1.y, 3.8f), Quaternion.identity);
         }
         else
         {
-            unitArray[0] = Instantiate((GameObject)Resources.Load("PuyaUnit"), new Vector2(ps.posSpawnP2.x, 3.8f), Quaternion.identity);
-            unitArray[1] = Instantiate((GameObject)Resources.Load("PuyaUnit"), new Vector2(ps.posSpawnP2.y, 3.8f), Quaternion.identity);
+            unitArray[0] = Instantiate(GetRandomPuyaPrefab(), new Vector2(ps.posSpawnP2.x, 3.8f), Quaternion.identity);
+            unitArray[1] = Instantiate(GetRandomPuyaPrefab(), new Vector2(ps.posSpawnP2.y, 3.8f), Quaternion.identity);
         }
         unitArray[0].transform.parent = gameObject.transform;
         unitArray[1].transform.parent = gameObject.transform;
@@ -40,12 +40,20 @@ public class BlocPuya : MonoBehaviour
         UpdateGameBoard();
     }
 
+    GameObject GetRandomPuyaPrefab()
+    {
+        string[] puyoPrefabNames = { "PuyaUnitBlue", "PuyaUnitGreen", "PuyaUnitPurple", "PuyaUnitYellow", "PuyaUnitRed" };
+
+        string randomPrefabName = puyoPrefabNames[Random.Range(0, puyoPrefabNames.Length)];
+
+        return (GameObject)Resources.Load(randomPrefabName);
+    }
     void Update()
     {
-        AutoDrop();
+        AutoDrop();       
     }
 
-    void AutoDrop()
+    public void AutoDrop()
     {
         if (interval > fallSpeed)
         {
@@ -91,7 +99,7 @@ public class BlocPuya : MonoBehaviour
     {
         Vector3 vect = GetClockwiseRotationVector();
 
-        print("vector rotate :" + vect);
+        print("vector rotate :"+vect);
         if (ValidRotate(vect))
         {
             Move(vect, unitArray[1].transform);
@@ -110,7 +118,7 @@ public class BlocPuya : MonoBehaviour
     void Move(Vector3 vector, Transform target)
     {
         ClearCurrentGameboardPosition();
-        target.position += vector * gridStep;
+        target.position += vector*gridStep;
         UpdateGameBoard();
     }
 
@@ -152,19 +160,19 @@ public class BlocPuya : MonoBehaviour
             return new Vector3(+1, -1);
         }
         else { return new Vector3(0, 0); }
-
+        
     }
 
     Vector3 GetCounterClockwiseRotationVector()
     {
         Vector3 puyaUnitPos = unitArray[1].transform.position;
 
-        print("RoundVector" + puyaUnitPos);
-        print("Position" + unitArray[0].transform.position);
+        print("RoundVector"+puyaUnitPos);
+        print("Position"+unitArray[0].transform.position);
 
         if (Vector3.Distance(puyaUnitPos + left * gridStep, unitArray[0].transform.position) < 0.1f)
         {
-            return new Vector3(-1, +1);
+             return new Vector3(-1, +1);
         }
         else if (Vector3.Distance(puyaUnitPos + up * gridStep, unitArray[0].transform.position) < 0.1f)
         {
@@ -188,13 +196,13 @@ public class BlocPuya : MonoBehaviour
             unitArray[1].GetComponent<PuyaUnit>().activelyFalling;
     }
 
+  
 
-
-    bool ValidMove(Vector3 direction)
+    public bool ValidMove(Vector3 direction)
     {
         foreach (Transform puya in transform)
         {
-            Vector3 newPosition = new Vector3(puya.position.x + direction.x * gridStep, puya.position.y + direction.y * gridStep, 0);
+            Vector3 newPosition = new Vector3(puya.position.x + direction.x* gridStep, puya.position.y + direction.y* gridStep, 0);
             if (!grid.FreeSpace(newPosition, transform))
             {
                 return false;

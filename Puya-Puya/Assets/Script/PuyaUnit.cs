@@ -5,7 +5,6 @@ using System;
 
 public class PuyaUnit : MonoBehaviour
 {
-    private Color[] colorArray = { Color.blue, Color.green, Color.yellow, Color.magenta };
     public bool activelyFalling = true;
     public bool forcedDownwards = false;
     public float gridStep = 0.7f;
@@ -13,20 +12,14 @@ public class PuyaUnit : MonoBehaviour
 
     public Grid grid;
 
-    void Awake()
-    {
-        colorIdx = UnityEngine.Random.Range(0, 4);
-        GetComponent<SpriteRenderer>().color = colorArray[colorIdx];
-    }
 
     public IEnumerator DropToFloor()
     {
         WaitForSeconds wait = new WaitForSeconds(.25f);
 
         Vector3 currentPos = WorldPosToGridPos(gameObject.transform.position);
-
         print("CurrentPos : " + currentPos);
-        for (int row = Convert.ToInt32(currentPos.y) + 1; row < 12; row++)
+        for (int row = Convert.ToInt32(currentPos.y) +1; row <12; row++)
         {
             int currentY = Convert.ToInt32(currentPos.x);
             Debug.Log("currentX " + currentY);
@@ -34,9 +27,9 @@ public class PuyaUnit : MonoBehaviour
             if (grid.IsEmpty(currentY, row))
             {
                 forcedDownwards = true;
-                grid.ClearByGridPos(currentY, row - 1);
+                grid.ClearByGridPos(currentY, row-1);
                 grid.AddByGridPos(currentY, row, gameObject.transform);
-                gameObject.transform.position += Vector3.down * gridStep;
+                gameObject.transform.position += Vector3.down*gridStep;
                 yield return wait;
             }
             else
@@ -51,7 +44,7 @@ public class PuyaUnit : MonoBehaviour
     public void DropToFloorExternal()
     {
         StartCoroutine(DropToFloor());
-    }
+    } 
 
     public Vector3 WorldPosToGridPos(Vector3 pos)
     {
