@@ -1842,10 +1842,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88a393b9071ff9a41bb5ae301bb9aaa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadingscreen: {fileID: 1058609481}
   menuObj: {fileID: 2128626787}
   settingsObj: {fileID: 49650006}
-  sceneName: Gameplay
+  sceneName: SelectPlayer
 --- !u!114 &784143693
 MonoBehaviour:
   m_ObjectHideFlags: 0

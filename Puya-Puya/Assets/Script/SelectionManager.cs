@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SelectionManager : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class SelectionManager : MonoBehaviour
     public InputActionAsset iaa;
     private bool isSelectionValidatedP1 = false;
     private bool isSelectionValidatedP2 = false;
+    public Canvas mainCanva;
 
     private void Awake()
     {
@@ -72,7 +74,6 @@ public class SelectionManager : MonoBehaviour
         playerSelectionP1 = newIndex;
         characterButtons[newIndex].Select();
 
-        PlayerPrefs.SetInt("ImageP1", newIndex);
     }
 
     private void SubmitCharacterSelectionP1()
@@ -81,7 +82,8 @@ public class SelectionManager : MonoBehaviour
         {
             okBannerP1.SetActive(true);
             isSelectionValidatedP1 = true; // met à jour la validation de sélection
-
+            PlayerPrefs.SetInt("ImageP1", playerSelectionP1);
+            checkPlayersReady();
         }
     }
 
@@ -125,7 +127,6 @@ public class SelectionManager : MonoBehaviour
         selectedCharacterP2.sprite = characterImages[newIndex];
         playerSelectionP2 = newIndex;
         characterButtons[newIndex].Select();
-        PlayerPrefs.SetInt("ImageP2", newIndex);
     }
     private void SubmitCharacterSelectionP2()
     {
@@ -133,7 +134,8 @@ public class SelectionManager : MonoBehaviour
         {
             okBannerP2.SetActive(true);
             isSelectionValidatedP2 = true; // met à jour la validation de sélection
-
+            PlayerPrefs.SetInt("ImageP2", playerSelectionP2);
+            checkPlayersReady();
         }
     }
 
@@ -147,5 +149,20 @@ public class SelectionManager : MonoBehaviour
             isSelectionValidatedP2 = false; // met à jour la validation de sélection
 
         }
+    }
+
+    public void checkPlayersReady()
+    {
+        if(isSelectionValidatedP1==true && isSelectionValidatedP2 == true)
+        {
+            iaa.Disable();
+            StartCoroutine(toGamePlay());
+        }
+    }
+
+    public IEnumerator toGamePlay()
+    {
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene("GamePlay");
     }
 }
