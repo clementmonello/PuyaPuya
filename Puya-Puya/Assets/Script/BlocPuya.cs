@@ -15,8 +15,6 @@ public class BlocPuya : MonoBehaviour
     private Vector3 up = Vector3.up;
     private float gridStep = 0.7f;
 
-    private bool puyoUnitDropsFinished = false;
-
     public PuyaSpawner ps;
 
     public Grid grid;
