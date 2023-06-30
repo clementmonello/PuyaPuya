@@ -27,23 +27,32 @@ public class Grid : MonoBehaviour
     }
 
     public bool WithinBorders(Vector3 target)
-    {
-        return Convert.ToInt32(target.x) > -1 &&
-            Convert.ToInt32(target.x) < 6 &&
-            Convert.ToInt32(target.y) > -1 &&
-            Convert.ToInt32(target.y) < 12;
-    }
+{
+    int x = Convert.ToInt32(target.x);
+    int y = Convert.ToInt32(target.y);
 
-    public bool FreeSpace(Vector3 target, Transform parentTransform)
+    bool withinPositiveBounds = x >= 0 && x < 6 && y >= 0 && y < 12;
+    
+    bool withinNegativeBounds = x >= -6 && x < 0 && y >= -12 && y < 0;
+
+    return withinPositiveBounds || withinNegativeBounds;
+}
+
+   public bool FreeSpace(Vector3 target, Transform parentTransform)
+{
+    Vector3 v = WorldPosToGridPos(target);
+    if (WithinBorders(v))
     {
-        Vector3 v = WorldPosToGridPos(target);
-        if (WithinBorders(v))
+          int x = Convert.ToInt32(v.x);
+        int y = Convert.ToInt32(v.y);
+
+        if (x >= 0 && x < gameBoard.GetLength(0) && y >= 0 && y < gameBoard.GetLength(1))
         {
-            return gameBoard[Convert.ToInt32(v.x), Convert.ToInt32(v.y)] == null ||
-                gameBoard[Convert.ToInt32(v.x), Convert.ToInt32(v.y)].parent == parentTransform;
+            return gameBoard[x, y] == null || gameBoard[x, y].parent == parentTransform;
         }
-        return false;
     }
+    return false;
+}
 
     public bool IsEmpty(int col, int row)
     {
@@ -249,7 +258,7 @@ public class Grid : MonoBehaviour
         else
         {
             posRetour.x = Convert.ToInt32((pos.x - 3.8f) / 0.7f);
-            posRetour.y = Convert.ToInt32((pos.y - 3.8f) / 0.7f);
+            posRetour.y = Convert.ToInt32((pos.y - (-3.8f)) / 0.7f);
         }
         return posRetour;
     }
