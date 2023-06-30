@@ -6,7 +6,24 @@ using UnityEngine.UI;
 
 public class Grid : MonoBehaviour
 {
+    public Text PointP1, PointP2;
+    public bool P1;
     public Transform[,] gameBoard = new Transform[6, 12];
+    private int pointParPuya = 100, resultat,resultatP1,resultatP2;
+
+    public void AddScore(int resultat) 
+    {
+        if (P1 == true) 
+        {
+            resultatP1 += resultat;
+            PointP1.text = resultatP1.ToString();
+        }
+        else 
+        {
+            resultatP2 += resultat;
+            PointP2.text = resultatP2.ToString();
+        }
+    }
 
     public bool WithinBorders(Vector3 target)
     {
@@ -130,8 +147,11 @@ public class Grid : MonoBehaviour
 
         if (groupToDelete.Count != 0)
         {
+            resultat = groupToDelete.Count * pointParPuya;
             DeleteUnits(groupToDelete);
             DropAllColumns();
+            AddScore(resultat);
+            resultat = 0;
             return true;
         }
         else
@@ -178,7 +198,16 @@ public void AddNeighbors(Transform currentUnit, List<Transform> currentGroup)
 
             // Ajouter des messages de débogage ici
             Debug.Log("Neighbor detected at (" + (int)gridPos.x + ", " + (int)gridPos.y + ")");
-
+            currentGroup.Add(currentUnit);
+        }
+        else
+        {
+            return;
+        }
+        foreach (Vector3 direction in directions)
+        {
+            Vector3 neighborPos = currentUnit.position + direction;
+            Vector3 gridPos = WorldPosToGridPos(neighborPos);
             AddNeighbors(nextUnit, currentGroup);
         }
     }
@@ -217,7 +246,6 @@ public void AddNeighbors(Transform currentUnit, List<Transform> currentGroup)
                 }
             }
         }
-
         return false;
     }
 

@@ -21,7 +21,6 @@ public class PuyaSpawner : MonoBehaviour
         {
             StartCoroutine(DelayDelete());
         }
-
         StartCoroutine(DelaySpawn());
     }
 

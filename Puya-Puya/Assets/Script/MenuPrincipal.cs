@@ -33,7 +33,7 @@ public class MenuPrincipal : MonoBehaviour
     {
         Application.Quit();
     }
-    public void backToMenu()
+    public void BackToMenu()
     {
         settingsObj.SetActive(false);
         menuObj.SetActive(true);
