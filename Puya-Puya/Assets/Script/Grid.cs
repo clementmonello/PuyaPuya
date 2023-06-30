@@ -175,43 +175,34 @@ public class Grid : MonoBehaviour
         }
     }
 
-public void AddNeighbors(Transform currentUnit, List<Transform> currentGroup)
-{
-    Vector3[] directions = { Vector3.up, Vector3.down, Vector3.right, Vector3.left };
-    if (currentGroup.IndexOf(currentUnit) == -1)
+    public void AddNeighbors(Transform currentUnit, List<Transform> currentGroup)
     {
-        currentGroup.Add(currentUnit);
-    }
-    else
-    {
-        return;
-    }
-
-    foreach (Vector3 direction in directions)
-    {
-        Vector3 neighborPos = currentUnit.position + direction;
-        Vector3 gridPos = WorldPosToGridPos(neighborPos);
-
-        if (WithinBorders(gridPos) && !IsEmpty((int)gridPos.x, (int)gridPos.y) && ColorMatches((int)gridPos.x, (int)gridPos.y, currentUnit))
+        Vector3[] directions = { Vector3.up, Vector3.down, Vector3.right, Vector3.left };
+        if (currentGroup.IndexOf(currentUnit) == -1)
         {
-            Transform nextUnit = gameBoard[(int)gridPos.x, (int)gridPos.y];
-
-            // Ajouter des messages de débogage ici
-            Debug.Log("Neighbor detected at (" + (int)gridPos.x + ", " + (int)gridPos.y + ")");
             currentGroup.Add(currentUnit);
         }
         else
         {
             return;
         }
+
         foreach (Vector3 direction in directions)
         {
             Vector3 neighborPos = currentUnit.position + direction;
             Vector3 gridPos = WorldPosToGridPos(neighborPos);
-            AddNeighbors(nextUnit, currentGroup);
+
+            if (WithinBorders(gridPos) && !IsEmpty((int)gridPos.x, (int)gridPos.y) && ColorMatches((int)gridPos.x, (int)gridPos.y, currentUnit))
+            {
+                Transform nextUnit = gameBoard[(int)gridPos.x, (int)gridPos.y];
+
+                // Ajouter des messages de débogage ici
+                Debug.Log("Neighbor detected at (" + (int)gridPos.x + ", " + (int)gridPos.y + ")");
+
+                AddNeighbors(nextUnit, currentGroup);
+            }
         }
     }
-}
 
     public void DeleteUnits(List<Transform> unitsToDelete)
     {
