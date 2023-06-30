@@ -36,6 +36,11 @@ public class PlayerController : MonoBehaviour
             {
                 puya.RotateRight();
             }
+            else if (Input.GetKeyDown(KeyCode.F1)) 
+            {
+                FindObjectOfType<PauseManager>().CallPauseScreen();
+                Debug.Log("EHEHEH");
+            }
         }
         else
         {
