@@ -74,11 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-<<<<<<<< Updated upstream:Puya-Puya/Assets/Script/ScriptableCharacter/PuyaUnitRed.prefab
   m_Sprite: {fileID: 21300000, guid: e4138abd08281d24e91492cbe41eb380, type: 3}
-========
-  m_Sprite: {fileID: 21300000, guid: 9933eab7df74f854ab65ba3140f05829, type: 3}
->>>>>>>> Stashed changes:Puya-Puya/Assets/Resources/PuyaUnitBlue.prefab
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -104,9 +100,5 @@ MonoBehaviour:
   activelyFalling: 1
   forcedDownwards: 0
   gridStep: 0.7
-<<<<<<<< Updated upstream:Puya-Puya/Assets/Script/ScriptableCharacter/PuyaUnitRed.prefab
   colorIdx: 5
-========
-  colorIdx: 0
->>>>>>>> Stashed changes:Puya-Puya/Assets/Resources/PuyaUnitBlue.prefab
   grid: {fileID: 0}
