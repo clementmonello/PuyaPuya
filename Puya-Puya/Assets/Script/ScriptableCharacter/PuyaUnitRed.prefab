@@ -12,11 +12,7 @@ GameObject:
   - component: {fileID: 5578903162293817492}
   - component: {fileID: 883886654725981754}
   m_Layer: 0
-<<<<<<<< Updated upstream:Puya-Puya/Assets/Script/ScriptableCharacter/PuyaUnitRed.prefab
   m_Name: PuyaUnitRed
-========
-  m_Name: PuyaUnitBlue
->>>>>>>> Stashed changes:Puya-Puya/Assets/Resources/PuyaUnitBlue.prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
