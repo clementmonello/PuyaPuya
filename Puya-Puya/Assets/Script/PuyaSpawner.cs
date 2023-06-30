@@ -21,7 +21,6 @@ public class PuyaSpawner : MonoBehaviour
         {
             StartCoroutine(DelayDelete());
         }
-
         StartCoroutine(DelaySpawn());
     }
 
@@ -41,7 +40,6 @@ public class PuyaSpawner : MonoBehaviour
         {
             StartCoroutine(DelayDelete());
         };
-
     }
 
     IEnumerator DelaySpawn()
