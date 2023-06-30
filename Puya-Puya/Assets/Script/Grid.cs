@@ -9,8 +9,28 @@ public class Grid : MonoBehaviour
     public Text PointP1, PointP2;
     public bool P1;
     public Transform[,] gameBoard = new Transform[6, 12];
+    public PuyaUnit BlackPuya;
     private int pointParPuya = 100, resultat,resultatP1,resultatP2;
 
+    //public void ThrowBlackPuya(int nb) 
+    //{
+    //    if (P1 == true)
+    //    {
+    //        for (int i = 0; i <= nb; i++)
+    //        {
+    //            Instantiate(BlackPuya, new Vector2(), Quaternion.identity);
+    //            BlackPuya.DropToFloor();
+    //        }
+    //    }
+    //    else
+    //    {
+    //        for (int i = 0; i <= nb; i++)
+    //        {
+    //            Instantiate(BlackPuya, new Vector2(), Quaternion.identity);
+    //            BlackPuya.DropToFloor();
+    //        }
+    //    }
+    //}
     public void AddScore(int resultat) 
     {
         if (P1 == true) 
@@ -68,9 +88,6 @@ public class Grid : MonoBehaviour
         return !IsEmpty((int)newPos.x, (int)newPos.y) && ColorMatches((int)newPos.x, (int)newPos.y, puyoUnitTransform);
     }
 
-
-
-    
     public void Clear(float col, float row)
     {
 
@@ -151,6 +168,7 @@ public class Grid : MonoBehaviour
             DeleteUnits(groupToDelete);
             DropAllColumns();
             AddScore(resultat);
+            //ThrowBlackPuya(1);
             resultat = 0;
             return true;
         }
@@ -255,6 +273,4 @@ public class Grid : MonoBehaviour
         }
         return posRetour;
     }
-
-  
 }
