@@ -2177,6 +2177,7 @@ MonoBehaviour:
   grid1: {fileID: 591141627}
   ControlleurP1: 1
   posSpawnP1: {x: -5.9, y: -5.2}
+<<<<<<< Updated upstream
   posSpawnP2: {x: 5.2, y: 5.9}
   listImagePlayer:
   - {fileID: 21300000, guid: 577482d6f4abcb54796def9d763c6c00, type: 3}
@@ -2185,6 +2186,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b9091b336e9a7804c8d8c383d1ed24ae, type: 3}
   previewP1: {fileID: 600838749}
   previewP2: {fileID: 1659972870}
+=======
+  posSpawnP2: {x: 0, y: 0}
+>>>>>>> Stashed changes
 --- !u!114 &430901063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2199,6 +2203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grid1: {fileID: 1001692256}
   ControlleurP1: 0
+<<<<<<< Updated upstream
   posSpawnP1: {x: -5.9, y: -5.2}
   posSpawnP2: {x: 5.2, y: 5.9}
   listImagePlayer:
@@ -2208,6 +2213,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b9091b336e9a7804c8d8c383d1ed24ae, type: 3}
   previewP1: {fileID: 600838749}
   previewP2: {fileID: 1659972870}
+=======
+  posSpawnP1: {x: 0, y: 0}
+  posSpawnP2: {x: 5.3, y: 6}
+>>>>>>> Stashed changes
 --- !u!1 &503620636
 GameObject:
   m_ObjectHideFlags: 0

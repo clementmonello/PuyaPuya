@@ -26,14 +26,21 @@ public class PuyaSpawner : MonoBehaviour
         {
             StartCoroutine(DelayDelete());
         }
+
         StartCoroutine(DelaySpawn());
     }
 
     private bool GameIsOver()
     {
+        if(ControlleurP1 ==  true){
         return
             grid1.gameBoard[2, 0] != null ||
             grid1.gameBoard[3, 0] != null;
+        }else{
+             return
+            grid1.gameBoard[2, 11] != null ||
+            grid1.gameBoard[3, 11] != null;
+        }
     }
 
     IEnumerator DelayDelete() //ici c'est les combos
@@ -61,7 +68,11 @@ public class PuyaSpawner : MonoBehaviour
         else
         {
             Debug.Log("spawn");
+<<<<<<< Updated upstream
             activePuyo = Instantiate((GameObject)Resources.Load("Puya"), ControlleurP1 == true ? posSpawnP1 : posSpawnP2, Quaternion.identity).GetComponent<BlocPuya>();
+=======
+            activePuyo = Instantiate((GameObject)Resources.Load("Puya"), (ControlleurP1 == true? posSpawnP1:posSpawnP2), Quaternion.identity).GetComponent<BlocPuya>();
+>>>>>>> Stashed changes
             activePuyo.grid = grid1;
             activePuyo.ps = this;
             activePuyo.GetComponent<PlayerController>().ControlleurP1 = ControlleurP1;
