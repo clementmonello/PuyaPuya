@@ -71,6 +71,8 @@ public class SelectionManager : MonoBehaviour
         selectedCharacterP1.sprite = characterImages[newIndex];
         playerSelectionP1 = newIndex;
         characterButtons[newIndex].Select();
+
+        PlayerPrefs.SetInt("ImageP1", newIndex);
     }
 
     private void SubmitCharacterSelectionP1()
@@ -123,6 +125,7 @@ public class SelectionManager : MonoBehaviour
         selectedCharacterP2.sprite = characterImages[newIndex];
         playerSelectionP2 = newIndex;
         characterButtons[newIndex].Select();
+        PlayerPrefs.SetInt("ImageP2", newIndex);
     }
     private void SubmitCharacterSelectionP2()
     {

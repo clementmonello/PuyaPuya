@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PuyaSpawner : MonoBehaviour
 {
@@ -9,9 +10,13 @@ public class PuyaSpawner : MonoBehaviour
     public bool ControlleurP1;
     public Vector2 posSpawnP1 = new Vector2(-5.9f, -5.2f);
     public Vector2 posSpawnP2 = new Vector2(5.2f, 5.9f);
+    public Sprite[] listImagePlayer;
+    public Image previewP1;
+    public Image previewP2;
 
     void Start()
     {
+        LoadPictures();
         SpawnPuyo();
     }
 
@@ -58,5 +63,17 @@ public class PuyaSpawner : MonoBehaviour
             activePuyo.GetComponent<PlayerController>().ControlleurP1 = ControlleurP1;
         }
         //grid1.DebugBoard();
+    }
+
+    public void LoadPictures()
+    {
+        if (ControlleurP1 == true)
+        {
+            previewP1.sprite = listImagePlayer[PlayerPrefs.GetInt("ImageP1")];
+        }
+        else
+        {
+            previewP2.sprite = listImagePlayer[PlayerPrefs.GetInt("ImageP2")];
+        }
     }
 }
