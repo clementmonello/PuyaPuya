@@ -163,6 +163,7 @@ public class Grid : MonoBehaviour
         }
         else
         {
+            DropAllColumns();
             return false;
         }
     }
@@ -226,7 +227,7 @@ public class Grid : MonoBehaviour
             for (int col = 0; col < 6; col++)
             {
                 if (gameBoard[col, row] != null)
-                {
+                {   
                     if (gameBoard[col, row].gameObject.GetComponent<PuyaUnit>().forcedDownwards)
                     {
                         Debug.Log("fd");
