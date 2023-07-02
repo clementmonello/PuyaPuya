@@ -2498,9 +2498,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5137c92a24fb6a641ad91a984d5a506a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PointP1: {fileID: 0}
-  PointP2: {fileID: 0}
-  P1: 0
+  PointP1: {fileID: 333021978}
+  PointP2: {fileID: 1533641323}
+  P1: 1
   BlackPuya: {fileID: 0}
 --- !u!1 &600838747
 GameObject:
@@ -3947,8 +3947,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5137c92a24fb6a641ad91a984d5a506a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PointP1: {fileID: 0}
-  PointP2: {fileID: 0}
+  PointP1: {fileID: 333021978}
+  PointP2: {fileID: 1533641323}
   P1: 0
   BlackPuya: {fileID: 0}
 --- !u!1 &1016681671
