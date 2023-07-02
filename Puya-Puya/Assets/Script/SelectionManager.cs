@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class SelectionManager : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class SelectionManager : MonoBehaviour
     private bool isSelectionValidatedP1 = false;
     private bool isSelectionValidatedP2 = false;
     public Canvas mainCanva;
+    public AudioSource Ok;
 
     private void Awake()
     {
@@ -81,6 +83,7 @@ public class SelectionManager : MonoBehaviour
         if (playerSelectionP1 != -1)
         {
             okBannerP1.SetActive(true);
+            Ok.Play();
             isSelectionValidatedP1 = true; // met à jour la validation de sélection
             PlayerPrefs.SetInt("ImageP1", playerSelectionP1);
             checkPlayersReady();
@@ -133,6 +136,7 @@ public class SelectionManager : MonoBehaviour
         if (playerSelectionP2 != -1)
         {
             okBannerP2.SetActive(true);
+            Ok.Play();
             isSelectionValidatedP2 = true; // met à jour la validation de sélection
             PlayerPrefs.SetInt("ImageP2", playerSelectionP2);
             checkPlayersReady();

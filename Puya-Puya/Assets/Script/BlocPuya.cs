@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class BlocPuya : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class BlocPuya : MonoBehaviour
     private float gridStep = 0.7f;
 
     public PuyaSpawner ps;
+    public AudioSource Deplacement;
 
     public Grid grid;
 
@@ -206,6 +208,7 @@ public class BlocPuya : MonoBehaviour
                 return false;
             }
         }
+        Deplacement.Play();
         return true;
     }
 
@@ -213,6 +216,7 @@ public class BlocPuya : MonoBehaviour
     {
         Vector3 puyaPos = unitArray[1].transform.position;
         Vector3 newPosition = new Vector3(puyaPos.x + direction.x, puyaPos.y + direction.y);
+        Deplacement.Play();
         return grid.FreeSpace(newPosition, transform);
     }
 

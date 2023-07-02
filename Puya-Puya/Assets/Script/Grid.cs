@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class Grid : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class Grid : MonoBehaviour
     public Transform[,] gameBoard = new Transform[6, 12];
     public Text TextP1,TextP2;
     private int pointParPuya = 100, resultat,resultatP1,resultatP2;
+    public AudioSource Explosion;
 
     public void VictoryByPoint() 
     {
@@ -188,6 +190,7 @@ public class Grid : MonoBehaviour
         if (groupToDelete.Count != 0)
         {
             resultat = groupToDelete.Count * pointParPuya;
+            Explosion.Play();
             DeleteUnits(groupToDelete);
             DropAllColumns();
             AddScore(resultat);
