@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     private BlocPuya puya;
     public bool ControlleurP1;
+
     void Start()
     {
         puya = GetComponent<BlocPuya>();
@@ -15,15 +16,15 @@ public class PlayerController : MonoBehaviour
     {
         if (ControlleurP1 == true)
         {
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            if (Input.GetKeyDown(KeyCode.Q))
             {
                 puya.MoveLeft();
             }
-            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            else if (Input.GetKeyDown(KeyCode.S))
             {
                 puya.MoveRight();
             }
-            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            else if (Input.GetKeyDown(KeyCode.D))
             {
                 puya.MoveDown();
             }
@@ -35,23 +36,22 @@ public class PlayerController : MonoBehaviour
             {
                 puya.RotateRight();
             }
-            else if (Input.GetKeyDown(KeyCode.F1)) 
+            else if (Input.GetKeyDown(KeyCode.Escape)) 
             {
                 FindObjectOfType<PauseManager>().CallPauseScreen();
-                Debug.Log("EHEHEH");
             }
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.JoystickButton0))
+            if (Input.GetKeyDown(KeyCode.JoystickButton3))
             {
                 puya.MoveLeft();
             }
-            else if (Input.GetKeyDown(KeyCode.JoystickButton2))
+            else if (Input.GetKeyDown(KeyCode.JoystickButton1))
             {
                 puya.MoveRight();
             }
-            else if (Input.GetKeyDown(KeyCode.JoystickButton1))
+            else if (Input.GetKeyDown(KeyCode.JoystickButton2))
             {
                 puya.MoveDown();
             }
