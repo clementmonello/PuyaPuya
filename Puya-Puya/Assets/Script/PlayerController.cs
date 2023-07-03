@@ -20,11 +20,11 @@ public class PlayerController : MonoBehaviour
             {
                 puya.MoveLeft();
             }
-            else if (Input.GetKeyDown(KeyCode.S))
+            else if (Input.GetKeyDown(KeyCode.D))
             {
                 puya.MoveRight();
             }
-            else if (Input.GetKeyDown(KeyCode.D))
+            else if (Input.GetKeyDown(KeyCode.S))
             {
                 puya.MoveDown();
             }
