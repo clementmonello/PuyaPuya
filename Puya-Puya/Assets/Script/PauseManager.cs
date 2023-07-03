@@ -27,4 +27,9 @@ public class PauseManager : MonoBehaviour
     {
         Time.timeScale = 1;
     }
+
+    public void Restart() 
+    {
+        SceneManager.LoadScene("Gameplay");
+    }
 }

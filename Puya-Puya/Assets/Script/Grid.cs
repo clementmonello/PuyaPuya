@@ -10,27 +10,29 @@ public class Grid : MonoBehaviour
     public Text PointP1, PointP2;
     public bool P1;
     public Transform[,] gameBoard = new Transform[6, 12];
-    public Text TextP1,TextP2;
-    public GameObject BackgroundVictoryP1,BackgroundVictoryP2;
-    private int pointParPuya = 100, resultat,resultatP1,resultatP2;
+    public Text TextP1, TextP2;
+    public GameObject BackgroundVictoryP1, BackgroundVictoryP2, EndScreen;
+    private int pointParPuya = 100, resultat, resultatP1, resultatP2;
     public AudioSource Explosion;
 
     public void VictoryByPoint() 
     {
-        if(resultatP1 >= 10000 ) 
+        if(resultatP1 >= 3000 ) 
         {
             TextP1.text = "You Win" ;
             TextP2.text = "You Loose";
             BackgroundVictoryP1.SetActive(true);
             BackgroundVictoryP2.SetActive(true);
+            EndScreen.SetActive(true);
             Time.timeScale = 0;
         }
-        else if( resultatP2 >= 10000) 
+        else if( resultatP2 >= 3000) 
         {
             TextP2.text = "You Win";
             TextP1.text = "You Loose";
             BackgroundVictoryP1.SetActive(true);
             BackgroundVictoryP2.SetActive(true);
+            EndScreen.SetActive(true);
             Time.timeScale = 0;
         }
     }
@@ -43,6 +45,7 @@ public class Grid : MonoBehaviour
             TextP2.text = "You Loose";
             BackgroundVictoryP1.SetActive(true);
             BackgroundVictoryP2.SetActive(true);
+            EndScreen.SetActive(true);
             Time.timeScale = 0;
         }
         else if (OverP1 == true)
@@ -51,6 +54,7 @@ public class Grid : MonoBehaviour
             TextP1.text = "You Loose";
             BackgroundVictoryP1.SetActive(true);
             BackgroundVictoryP2.SetActive(true);
+            EndScreen.SetActive(true);
             Time.timeScale = 0;
         }
     }
