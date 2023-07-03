@@ -2336,7 +2336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c62f3d0dff6f9f148a64ec517011eafa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Grid1: {fileID: 591141627}
+  Grid1: {fileID: 0}
   ControlleurP1: 1
   posSpawnP1: {x: -5.9, y: -5.2}
   posSpawnP2: {x: 5.2, y: 5.9}

@@ -91,6 +91,7 @@ public class Grid : MonoBehaviour
 
     public bool IsEmpty(int col, int row)
     {
+        //Debug.Log("next row within border: " + WithinBorders(new Vector3(col, row, 0)));
         if (WithinBorders(new Vector3(col, row, 0)))
         {
             return gameBoard[col, row] == null;
@@ -118,9 +119,9 @@ public class Grid : MonoBehaviour
 
         Vector3 v=WorldPosToGridPos(new Vector3(col,row));
 
-        print(row);
-        print(col);
-        print(v);
+        //print(row);
+        //print(col);
+        //print(v);
 
         gameBoard[Convert.ToInt32(v.x), Convert.ToInt32(v.y)] = null;
     }
@@ -133,6 +134,9 @@ public class Grid : MonoBehaviour
     public void Add(float col, float row, Transform obj)
     {
         Vector3 v = WorldPosToGridPos(new Vector3(col, row));
+
+        Debug.Log("before convertion" + col + "," + row);
+        Debug.Log("after convertion" + v);
 
         gameBoard[Convert.ToInt32(v.x), Convert.ToInt32(v.y)] = obj;
     }
@@ -295,7 +299,7 @@ public class Grid : MonoBehaviour
         else
         {
             posRetour.x = Convert.ToInt32((pos.x - 3.8f) / 0.7f);
-            posRetour.y = Convert.ToInt32((pos.y - (-3.8f)) / 0.7f);
+            posRetour.y = Convert.ToInt32((pos.y - 3.8f) / -0.7f);
         }
         return posRetour;
     }

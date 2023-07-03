@@ -37,8 +37,8 @@ public class PuyaSpawner : MonoBehaviour
             Grid1.gameBoard[3, 0] != null;
         }else{
              return
-            Grid1.gameBoard[2, 11] != null ||
-            Grid1.gameBoard[3, 11] != null;
+            Grid1.gameBoard[2, 0] != null ||
+            Grid1.gameBoard[3, 0] != null;
         }
     }
 

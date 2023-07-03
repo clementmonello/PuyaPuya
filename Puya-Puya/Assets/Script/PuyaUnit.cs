@@ -18,12 +18,12 @@ public class PuyaUnit : MonoBehaviour
         WaitForSeconds wait = new WaitForSeconds(.25f);
 
         Vector3 currentPos = WorldPosToGridPos(gameObject.transform.position);
-        print("CurrentPos : " + currentPos);
+        Debug.Log("CurrentPos : " + currentPos);
         for (int row = Convert.ToInt32(currentPos.y) +1; row <12; row++)
         {
             int currentY = Convert.ToInt32(currentPos.x);
-            Debug.Log("currentX " + currentY);
-            Debug.Log("ligne " + row);
+            //Debug.Log("currentY " + currentY);
+            //Debug.Log("ligne " + row);
             if (grid.IsEmpty(currentY, row))
             {
                 forcedDownwards = true;
@@ -58,9 +58,9 @@ public class PuyaUnit : MonoBehaviour
         else
         {
             posRetour.x = Convert.ToInt32((pos.x - 3.8f) / 0.7f);
-            posRetour.y = Convert.ToInt32((pos.y - 3.8f) / 0.7f);
+            posRetour.y = Convert.ToInt32((pos.y - 3.8f) / -0.7f);
         }
-        //Debug.Log(posRetour);
+        Debug.Log("pos:"+pos);
         return posRetour;
     }
 
