@@ -6,7 +6,6 @@ public class PlayerController : MonoBehaviour
 {
     private BlocPuya puya;
     public bool ControlleurP1;
-
     void Start()
     {
         puya = GetComponent<BlocPuya>();

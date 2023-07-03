@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PuyaSpawner : MonoBehaviour
 {
     private BlocPuya activePuyo;
-    public Grid grid1;
+    public Grid Grid1;
     public bool ControlleurP1;
     public Vector2 posSpawnP1 = new Vector2(-5.9f, -5.2f);
     public Vector2 posSpawnP2 = new Vector2(5.2f, 5.9f);
@@ -22,7 +22,7 @@ public class PuyaSpawner : MonoBehaviour
 
     public void SpawnPuyo()
     {
-        if (grid1.WhatToDelete())
+        if (Grid1.WhatToDelete())
         {
             StartCoroutine(DelayDelete());
         }
@@ -33,20 +33,20 @@ public class PuyaSpawner : MonoBehaviour
     {
         if(ControlleurP1 ==  true){
         return
-            grid1.gameBoard[2, 0] != null ||
-            grid1.gameBoard[3, 0] != null;
+            Grid1.gameBoard[2, 0] != null ||
+            Grid1.gameBoard[3, 0] != null;
         }else{
              return
-            grid1.gameBoard[2, 11] != null ||
-            grid1.gameBoard[3, 11] != null;
+            Grid1.gameBoard[2, 11] != null ||
+            Grid1.gameBoard[3, 11] != null;
         }
     }
 
     IEnumerator DelayDelete() //ici c'est les combos
     {
-        grid1.DropAllColumns();
-        yield return new WaitUntil(() => !grid1.AnyFallingBlocks());
-        if (grid1.WhatToDelete())
+        Grid1.DropAllColumns();
+        yield return new WaitUntil(() => !Grid1.AnyFallingBlocks());
+        if (Grid1.WhatToDelete())
         {
             StartCoroutine(DelayDelete());
         };
@@ -54,20 +54,27 @@ public class PuyaSpawner : MonoBehaviour
 
     IEnumerator DelaySpawn()
     {
-        yield return new WaitUntil(() => !grid1.AnyFallingBlocks() && !grid1.WhatToDelete());
+        yield return new WaitUntil(() => !Grid1.AnyFallingBlocks() && !Grid1.WhatToDelete());
         if (GameIsOver())
         {
-            enabled = false;
-            Debug.Log("game over");
+            if (ControlleurP1 == true) 
+            {
+                enabled = false;
+                Debug.Log("game over P1");
+                Grid1.VictoryByFull(ControlleurP1);
+            }
+            else if(ControlleurP1 == false) 
+            {
+                enabled = false;
+                Debug.Log("Game Over P2");
+                Grid1.VictoryByFull(ControlleurP1);
+            }
         }
-        //else if () 
-        //{
-        //// wait black
-        //}
         else
         {
             Debug.Log("spawn");
-            activePuyo = Instantiate((GameObject)Resources.Load("Puya"), (ControlleurP1 == true? posSpawnP1:posSpawnP2), Quaternion.identity).GetComponent<BlocPuya>();            activePuyo.grid = grid1;
+            activePuyo = Instantiate((GameObject)Resources.Load("Puya"), (ControlleurP1 == true? posSpawnP1:posSpawnP2), Quaternion.identity).GetComponent<BlocPuya>();            
+            activePuyo.grid = Grid1;
             activePuyo.ps = this;
             activePuyo.GetComponent<PlayerController>().ControlleurP1 = ControlleurP1;
         }

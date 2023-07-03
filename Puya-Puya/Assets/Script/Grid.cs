@@ -3,14 +3,48 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class Grid : MonoBehaviour
 {
     public Text PointP1, PointP2;
     public bool P1;
     public Transform[,] gameBoard = new Transform[6, 12];
-    public PuyaUnit BlackPuya;
+    public Text TextP1,TextP2;
     private int pointParPuya = 100, resultat,resultatP1,resultatP2;
+    public AudioSource Explosion;
+
+    public void VictoryByPoint() 
+    {
+        if(resultatP1 >= 10000 ) 
+        {
+            TextP1.text = "You Win" ;
+            TextP2.text = "You Loose";
+            Time.timeScale = 0;
+        }
+        else if( resultatP2 >= 10000) 
+        {
+            TextP2.text = "You Win";
+            TextP1.text = "You Loose";
+            Time.timeScale = 0;
+        }
+    }
+
+    public void VictoryByFull(bool OverP1) 
+    {
+        if (OverP1 == false)
+        {
+            TextP1.text = "You Win";
+            TextP2.text = "You Loose";
+            Time.timeScale = 0;
+        }
+        else if (OverP1 == true)
+        {
+            TextP2.text = "You Win";
+            TextP1.text = "You Loose";
+            Time.timeScale = 0;
+        }
+    }
 
     public void AddScore(int resultat) 
     {
@@ -24,6 +58,7 @@ public class Grid : MonoBehaviour
             resultatP2 += resultat;
             PointP2.text = resultatP2.ToString();
         }
+        VictoryByPoint();
     }
 
     public bool WithinBorders(Vector3 target)
@@ -155,6 +190,7 @@ public class Grid : MonoBehaviour
         if (groupToDelete.Count != 0)
         {
             resultat = groupToDelete.Count * pointParPuya;
+            Explosion.Play();
             DeleteUnits(groupToDelete);
             DropAllColumns();
             AddScore(resultat);
