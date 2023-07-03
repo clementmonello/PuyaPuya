@@ -11,7 +11,7 @@ public class Grid : MonoBehaviour
     public bool P1;
     public Transform[,] gameBoard = new Transform[6, 12];
     public Text TextP1,TextP2;
-    public GameObject backgroundVictory;
+    public GameObject BackgroundVictoryP1,BackgroundVictoryP2;
     private int pointParPuya = 100, resultat,resultatP1,resultatP2;
     public AudioSource Explosion;
 
@@ -21,14 +21,16 @@ public class Grid : MonoBehaviour
         {
             TextP1.text = "You Win" ;
             TextP2.text = "You Loose";
-            backgroundVictory.SetActive(true);
+            BackgroundVictoryP1.SetActive(true);
+            BackgroundVictoryP2.SetActive(true);
             Time.timeScale = 0;
         }
         else if( resultatP2 >= 10000) 
         {
             TextP2.text = "You Win";
             TextP1.text = "You Loose";
-            backgroundVictory.SetActive(true);
+            BackgroundVictoryP1.SetActive(true);
+            BackgroundVictoryP2.SetActive(true);
             Time.timeScale = 0;
         }
     }
@@ -39,14 +41,16 @@ public class Grid : MonoBehaviour
         {
             TextP1.text = "You Win";
             TextP2.text = "You Loose";
-            backgroundVictory.SetActive(true);
+            BackgroundVictoryP1.SetActive(true);
+            BackgroundVictoryP2.SetActive(true);
             Time.timeScale = 0;
         }
         else if (OverP1 == true)
         {
             TextP2.text = "You Win";
             TextP1.text = "You Loose";
-            backgroundVictory.SetActive(true);
+            BackgroundVictoryP1.SetActive(true);
+            BackgroundVictoryP2.SetActive(true);
             Time.timeScale = 0;
         }
     }
