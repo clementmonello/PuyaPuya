@@ -361,7 +361,7 @@
                 {
                     "name": "negative",
                     "id": "67713b0e-f26b-4e47-b13d-c5f7649a864b",
-                    "path": "<Joystick>/stick/down",
+                    "path": "<Gamepad>/dpad/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -372,7 +372,7 @@
                 {
                     "name": "positive",
                     "id": "21d4f028-4458-4e7d-82f8-ba94779b145f",
-                    "path": "<Joystick>/stick/up",
+                    "path": "<Gamepad>/dpad/up",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -394,7 +394,7 @@
                 {
                     "name": "negative",
                     "id": "59698b17-fbc4-47fd-80ca-e26285ae389c",
-                    "path": "<Joystick>/stick/left",
+                    "path": "<Gamepad>/dpad/left",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -405,7 +405,7 @@
                 {
                     "name": "positive",
                     "id": "f72ec023-f3ba-425e-8ba1-7b6a7e6327a0",
-                    "path": "<Joystick>/stick/right",
+                    "path": "<Gamepad>/dpad/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -416,7 +416,7 @@
                 {
                     "name": "",
                     "id": "c65c06b7-0c23-4d20-bd42-d0c9e8ebbcda",
-                    "path": "<HID::usb gamepad           >/button2",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -427,7 +427,7 @@
                 {
                     "name": "",
                     "id": "8a962495-f79c-4878-8bfd-2a53572bebf5",
-                    "path": "<HID::usb gamepad           >/button3",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
